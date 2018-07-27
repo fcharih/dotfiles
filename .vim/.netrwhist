@@ -1,0 +1,5 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_1='/Users/fcharih/Dropbox/Grad School/Projects/bioinf_api'
+let g:netrw_dirhist_2='/Users/fcharih/francoischarih@134.117.212.247'
+let g:netrw_dirhist_3='/Users/fcharih/bioinf_api/views'
