@@ -46,7 +46,7 @@ set splitright
 " 'cause you oughta plug it!
 "
 call plug#begin('~/.vim/plugged')
-
+Plug 'YorickPeterse/happy_hacking.vim'
 Plug 'vim-airline/vim-airline'
 
 " Completion stuff
