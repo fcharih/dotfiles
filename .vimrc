@@ -78,6 +78,7 @@ Plug 'jreybert/vimagit'
 
 " Misc
 Plug 'tpope/vim-surround'
+Plug 'mattn/emmet-vim'
 
 "" Snippets stuff
 Plug 'SirVer/ultisnips'
@@ -90,6 +91,12 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "mysnippets"]
 let g:UltiSnipsEditSplit="vertical"
 
+"" React js stuff
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+
+"" Colors :)
+Plug 'chriskempson/base16-vim'
 call plug#end()
 "=================================
 "
@@ -101,12 +108,35 @@ filetype off                  " required
 filetype plugin indent on    " required
 autocmd FileType tex setlocal shiftwidth=2 tabstop=2
 autocmd FileType json setlocal shiftwidth=2 tabstop=2
+autocmd FileType html setlocal ts=2 sts=2 sw=2
+
+" React files
+"au BufNewFile,BufRead *.jsx setlocal ft=html ft=javascript
 
 
 " Activate syntax highlighting
 syntax enable
 syntax on
 
-" THEME
-color happy_hacking
+colorscheme base16-default-dark
 
+" REQUIRED. This makes vim invoke Latex-Suite when you open a tex file.
+filetype plugin on
+
+" IMPORTANT: win32 users will need to have 'shellslash' set so that latex
+" can be called correctly.
+set shellslash
+
+" OPTIONAL: This enables automatic indentation as you type.
+filetype indent on
+
+" OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
+" 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
+" The following changes the default filetype back to 'tex':
+let g:tex_flavor='latex'
+
+" For proper React coloring (https://github.com/mxw/vim-jsx/issues/124)
+hi Tag        ctermfg=04
+hi xmlTag     ctermfg=04
+hi xmlTagName ctermfg=04
+hi xmlEndTag  ctermfg=04
