@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/fcharih/.oh-my-zsh
+export ZSH=~/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -104,7 +104,7 @@ tunnel() {
 ########################################################################
 
 ############################ MACOS SETTINGS ############################
-if [ "$OSTYPE" == *"Darwin"* ]]; then
+if [[ "$OSTYPE" == *"Darwin"* ]]; then
 	# For NRCan2018 project
 	export MTURK_CMD_HOME="/Users/fcharih/Dropbox/Grad School/Projects/NRCan_private/Phase II - Segmentation/aws-mturk-clt-1.3.4"
 	export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
@@ -112,9 +112,6 @@ fi
 ########################################################################
 
 ############################ LINUX SETTINGS ############################
-if [ "$OSTYPE" == *"linux"* ]]; then
-	# For NRCan2018 project
-	export MTURK_CMD_HOME="/Users/fcharih/Dropbox/Grad School/Projects/NRCan_private/Phase II - Segmentation/aws-mturk-clt-1.3.4"
-	export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+if [[ "$OSTYPE" == *"linux"* ]]; then
 fi
 ########################################################################
