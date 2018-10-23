@@ -106,9 +106,11 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 
 filetype plugin indent on    " required
-autocmd FileType tex setlocal shiftwidth=2 tabstop=2
-autocmd FileType json setlocal shiftwidth=2 tabstop=2
-autocmd FileType html setlocal ts=2 sts=2 sw=2
+set shiftwidth=2
+set softtabstop=2
+set tabstop=2
+
+autocmd FileType python setlocal ts=4 sts=4 sw=4
 
 " React files
 "au BufNewFile,BufRead *.jsx setlocal ft=html ft=javascript

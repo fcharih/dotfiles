@@ -1,11 +1,40 @@
-snippet pyhead "Francois's python header"
+snippet pytemplate "Francois' base template for a Python script"
 """
 $1.py
-Author: Francois Charih <francois.charih@gmail.com>
+Author: Francois Charih <francoischarih@sce.carleton.ca>
 Date created: `date +%d/%m/%y`
 
-Description: $3
+Description: $2
 """
+import argparse
+
+# ARGUMENT PARSER
+def parse_arguments():
+    parser = argparse.ArgumentParser(description='$3')
+    $4
+    parser.add_argument('--verbosity',
+                        '-v',
+                        help='Verbose mode; everything gets logged to the console.',
+                        action='store_true')
+    args = argparser.parse_arguments()
+    return args
+
+def main():
+		args = parse_arguments()
+    $5
+
+
+if __name__ == '__main__':
+    main()
+endsnippet
+
+snippet addarg "Add argument"
+parser.add_argument('--$1',
+                    '-$2',
+                    type=$3,
+                    required=$4,
+                    default=$5,
+                    help="$6")
 endsnippet
 
 snippet fundoc "Function documentation"
