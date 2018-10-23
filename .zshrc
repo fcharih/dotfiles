@@ -92,7 +92,7 @@ export EDITOR=vim
 export TERM=xterm-256color
 
 # Path 
-export PATH="/anaconda3/bin:$PATH"
+export PATH="$HOME/anaconda3/bin:$PATH"
 
 # Aliases
 alias vim='nvim'
@@ -113,5 +113,6 @@ fi
 
 ############################ LINUX SETTINGS ############################
 if [[ "$OSTYPE" == *"linux"* ]]; then
+	alias top='glances'
 fi
 ########################################################################
