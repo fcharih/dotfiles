@@ -95,6 +95,9 @@ let g:UltiSnipsEditSplit="vertical"
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 
+" Ale
+Plug 'w0rp/ale'
+
 "" Colors :)
 Plug 'chriskempson/base16-vim'
 call plug#end()
