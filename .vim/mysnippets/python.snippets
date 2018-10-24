@@ -16,7 +16,7 @@ def parse_arguments():
                         '-v',
                         help='Verbose mode; everything gets logged to the console.',
                         action='store_true')
-    args = argparser.parse_arguments()
+    args = parser.parse_args()
     return args
 
 def main():
