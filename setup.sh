@@ -28,12 +28,14 @@ pip install neovim # Neovim Python Client
 pip install jedi # Jedi for completion
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
 	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim # vim-plug
+mkdir .config
+mkdir .config/nvim
 
 # Install fzf fuzzy file finder
 bash $HOME/.fzf/install
 
 # Create symbolic links for my dotfiles
-rm $HOME/.config && ln -s dotfiles/.config .config
+ln -s dotfiles/init.vim .config/nvim/init.vim
 rm $HOME/.vimrc && ln -s dotfiles/.vimrc .vimrc
 rm $HOME/.zshrc && ln -s $HOME/dotfiles/.zshrc $HOME/.zshrc
 rm $HOME/.tmux.conf && ln -s $HOME/dotfiles/.tmux.conf $HOME/.tmux.conf
