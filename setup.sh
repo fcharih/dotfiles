@@ -34,7 +34,7 @@ mkdir .config/nvim
 # Install fzf fuzzy file finder
 bash $HOME/.fzf/install
 
-# Install Glances... it's cool
+# Install Glances... it's a cool replacement for "top"
 pip3 install glances
 
 # Create symbolic links for my dotfiles
