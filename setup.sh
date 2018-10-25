@@ -34,6 +34,9 @@ mkdir .config/nvim
 # Install fzf fuzzy file finder
 bash $HOME/.fzf/install
 
+# Install Glances... it's cool
+pip3 install glances
+
 # Create symbolic links for my dotfiles
 ln -s dotfiles/init.vim .config/nvim/init.vim
 rm $HOME/.vimrc && ln -s dotfiles/.vimrc .vimrc

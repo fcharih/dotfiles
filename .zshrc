@@ -96,6 +96,7 @@ export PATH="$HOME/anaconda3/bin:$PATH"
 
 # Aliases
 alias vim='nvim'
+alias top='glances'
 
 # Other
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh # fzf
@@ -116,7 +117,6 @@ fi
 
 ############################ LINUX SETTINGS ############################
 if [[ "$OSTYPE" == *"linux"* ]]; then
-	alias top='glances'
 fi
 ########################################################################
 
