@@ -16,6 +16,7 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 " Normal mode
 nnoremap <C-t> :split\|term<Enter>
 nnoremap <C-x> <C-w>
+nnoremap <C-f><C-f> :FZF<Enter>
 
 " Terminal mode
 tnoremap <Esc> <c-\><c-n>
