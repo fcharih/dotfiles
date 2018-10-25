@@ -12,10 +12,9 @@ mkdir temp
 sudo apt-get install -y zsh
 sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 
-# Install Anaconda
-curl -O https://repo.anaconda.com/archive/Anaconda3-5.2.0-Linux-x86_64.sh
-mv Anaconda3-5.2.0-Linux-x86_64.sh temp
-sudo bash temp/Anaconda3-5.2.0-Linux-x86_64.sh
+# Install Anaconda 
+curl -o temp/install_anaconda.sh https://repo.anaconda.com/archive/Anaconda3-5.3.0-Linux-x86_64.sh
+sudo bash temp/install_anaconda.sh -b # install in silent mode
 sudo chown -R $USER:$USER anaconda3
 
 # Install Node.js and yarn
@@ -23,29 +22,19 @@ wget -qO- https://deb.nodesource.com/setup_10.x | sudo -E bash -
 sudo apt-get install -y nodejs
 sudo npm install -g yarn
 
-## Setup Git
-git config --global user.email "francoischarih@sce.carleton.com"
-git config --global user.name "Francois Charih"
-
-# Install neovim
-sudo apt-get install -y neovim
-
-# Install Vim-Plug and deoplete
-pip install neovim
-pip install jedi
+# Vim stuff
+sudo apt-get install -y neovim # Neovim
+pip install neovim # Neovim Python Client
+pip install jedi # Jedi for completion
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim # vim-plug
+	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim # vim-plug
 
-# Setup .vimrc
-mkdir .config
-mkdir .config/nvim
-vimfilecontent="set runtimepath+=~/.vim,~/.vim/after
-set packpath+=~/.vim
-source ~/.vimrc"
-echo "$vimfilecontent" > ~/.config/nvim/init.vim 
-ln -s dotfiles/.vimrc .vimrc
+# Install fzf fuzzy file finder
+bash $HOME/.fzf/install
 
-# Create symbolic links 
+# Create symbolic links for my dotfiles
+rm $HOME/.config && ln -s dotfiles/.config .config
+rm $HOME/.vimrc && ln -s dotfiles/.vimrc .vimrc
 rm $HOME/.zshrc && ln -s $HOME/dotfiles/.zshrc $HOME/.zshrc
 rm $HOME/.tmux.conf && ln -s $HOME/dotfiles/.tmux.conf $HOME/.tmux.conf
 source .zshrc
@@ -57,3 +46,7 @@ sudo dpkg -i temp/docker-ce_18.06.1~ce~3-0~ubuntu_amd64.deb
 
 # Delete all temporary file
 rm -rf temp
+
+## Setup Git
+git config --global user.email "francoischarih@sce.carleton.com"
+git config --global user.name "Francois Charih"
