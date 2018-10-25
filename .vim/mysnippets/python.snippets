@@ -12,10 +12,8 @@ import argparse
 def parse_arguments():
     parser = argparse.ArgumentParser(description='$3')
     $4
-    parser.add_argument('--verbosity',
-                        '-v',
-                        help='Verbose mode; everything gets logged to the console.',
-                        action='store_true')
+    parser.add_argument('--verbose', '-v', action='store_true',
+                        help='Prints EVERYTHING to the console.')
     args = parser.parse_args()
     return args
 
@@ -29,25 +27,21 @@ if __name__ == '__main__':
 endsnippet
 
 snippet addarg "Add argument"
-parser.add_argument('--$1',
-                    '-$2',
-                    type=$3,
-                    required=$4,
-                    default=$5,
+parser.add_argument('--$1', '-$2' type=$3, required=$4, default=$5,
                     help="$6")
 endsnippet
 
-snippet fundoc "Function documentation"
-"""
-$1
+snippet pyfun "A documented Python function template."
+def $1():
+    """$2
 
-Args:
-    $2: $3
+    Args:
+        $3: $4
 
-Returns:
-    $4
+    Returns:
+        $5
 
-Raises:
-    None
-"""
+    Raises:
+        None
+    """
 endsnippet
