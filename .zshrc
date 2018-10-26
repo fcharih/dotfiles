@@ -98,13 +98,15 @@ export PATH="$HOME/anaconda3/bin:$PATH"
 alias vim='nvim'
 alias top='glances'
 
-# Other
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh # fzf
-
 # Functions
 tunnel() {
     ssh -N -n -L localhost:"$2":localhost:"$2" $1
 }
+
+# Other
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh # fzf
+[ -z "$TMUX"  ] && { tmux attach || exec tmux new-session;} # launch tmux by default
+
 ########################################################################
 
 ############################ MACOS SETTINGS ############################
