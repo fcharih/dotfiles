@@ -88,7 +88,7 @@ source $ZSH/oh-my-zsh.sh
 
 ########################### GENERAL SETTINGS ###########################
 # Environment variables
-export EDITOR=vim
+export EDITOR=nvim
 export TERM=xterm-256color
 
 # Path 
@@ -97,6 +97,7 @@ export PATH="$HOME/anaconda3/bin:$PATH"
 # Aliases
 alias vim='nvim'
 alias top='glances'
+alias vimo='vim $(fzf)'
 
 # Functions
 tunnel() {

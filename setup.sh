@@ -22,6 +22,9 @@ wget -qO- https://deb.nodesource.com/setup_10.x | sudo -E bash -
 sudo apt-get install -y nodejs
 sudo npm install -g yarn
 
+# Add gitk 
+sudo apt-get install gitk
+
 # Vim stuff
 sudo apt-get install -y neovim # Neovim
 pip install neovim # Neovim Python Client
