@@ -88,18 +88,26 @@ source $ZSH/oh-my-zsh.sh
 
 ########################### GENERAL SETTINGS ###########################
 # Environment variables
-export EDITOR=vim
+export EDITOR=nvim
 export TERM=xterm-256color
 
 # Path 
 
 # Aliases
 alias vim='nvim'
-alias top='top'
+alias vimo='vim $(fzf)'
 
 # Functions
 tunnel() {
     ssh -N -n -L localhost:"$2":localhost:"$2" $1
+}
+
+killallcontainers() {
+	docker ps --all | awk '{if(NR>1) print $1}' | xargs -I{} docker kill {}
+}
+
+removeallcontainers() {
+	docker ps --all | awk '{if(NR>1) print $1}' | xargs -I{} docker container rm {}
 }
 
 # Other
@@ -124,6 +132,9 @@ fi
 
 ############################ LINUX SETTINGS ############################
 if [[ "$OSTYPE" == *"linux"* ]]; then
+email() {
+	sendmail -t < $1
+}
 fi
 ########################################################################
 
