@@ -96,12 +96,19 @@ export PATH="$HOME/anaconda3/bin:$PATH"
 
 # Aliases
 alias vim='nvim'
-alias top='glances'
 alias vimo='vim $(fzf)'
 
 # Functions
 tunnel() {
     ssh -N -n -L localhost:"$2":localhost:"$2" $1
+}
+
+killallcontainers() {
+	docker ps --all | awk '{if(NR>1) print $1}' | xargs -I{} docker kill {}
+}
+
+removeallcontainers() {
+	docker ps --all | awk '{if(NR>1) print $1}' | xargs -I{} docker container rm {}
 }
 
 # Other
