@@ -92,11 +92,10 @@ export EDITOR=vim
 export TERM=xterm-256color
 
 # Path 
-export PATH="$HOME/anaconda3/bin:$PATH"
 
 # Aliases
 alias vim='nvim'
-alias top='glances'
+alias top='top'
 
 # Functions
 tunnel() {
@@ -114,6 +113,12 @@ if [[ "$OSTYPE" == *"Darwin"* ]]; then
 	# For NRCan2018 project
 	export MTURK_CMD_HOME="/Users/fcharih/Dropbox/Grad School/Projects/NRCan_private/Phase II - Segmentation/aws-mturk-clt-1.3.4"
 	export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+
+	export ANDROID_HOME=$HOME/Library/Android/sdk
+	export PATH=$PATH:$ANDROID_HOME/tools
+	export PATH=$PATH:$ANDROID_HOME/tools/bin
+	export PATH=$PATH:$ANDROID_HOME/platform-tools
+	export PATH=$PATH:$ANDROID_HOME/emulator
 fi
 ########################################################################
 
@@ -122,3 +127,4 @@ if [[ "$OSTYPE" == *"linux"* ]]; then
 fi
 ########################################################################
 
+export PATH="$HOME/anaconda/bin:$PATH"
