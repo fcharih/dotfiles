@@ -112,7 +112,6 @@ removeallcontainers() {
 
 # Other
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh # fzf
-[ -z "$TMUX"  ] && { tmux attach || exec tmux new-session;} # launch tmux by default
 
 ########################################################################
 
