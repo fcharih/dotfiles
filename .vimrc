@@ -80,6 +80,7 @@ Plug 'jreybert/vimagit'
 " Misc
 Plug 'tpope/vim-surround'
 Plug 'mattn/emmet-vim'
+Plug 'ipod825/vim-netranger'
 
 "" Snippets stuff
 Plug 'SirVer/ultisnips'
