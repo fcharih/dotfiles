@@ -2,7 +2,7 @@
 # Author: Francois Charih <francoischarih@sce.carleton.ca>
 #
 # Description: Installs the minimum set of dependencies I need
-# to work when I boot a new Ubuntu machine.
+# to work when I boot a new Ubuntu 18.04 machine.
 
 # Go to home directory
 cd $HOME
@@ -11,6 +11,12 @@ mkdir temp
 # Install the zshell
 sudo apt-get install -y zsh
 sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+
+# Create symbolic links for my dotfiles
+rm $HOME/.vimrc && ln -s dotfiles/.vimrc .vimrc
+rm $HOME/.zshrc && ln -s $HOME/dotfiles/.zshrc $HOME/.zshrc
+rm $HOME/.tmux.conf && ln -s $HOME/dotfiles/.tmux.conf $HOME/.tmux.conf
+source .zshrc
 
 # Install Anaconda 
 curl -o temp/install_anaconda.sh https://repo.anaconda.com/archive/Anaconda3-5.3.0-Linux-x86_64.sh
@@ -33,19 +39,16 @@ curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
 	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim # vim-plug
 mkdir .config
 mkdir .config/nvim
+echo "set runtimepath^=~/.vim runtimepath+=~/.vim/after
+let &packpath=&runtimepath
+source $HOME/.vimrc" > .config/nvim/init.vim
 
 # Install fzf fuzzy file finder
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 bash $HOME/.fzf/install
 
 # Install Glances... it's a cool replacement for "top"
 pip3 install glances
-
-# Create symbolic links for my dotfiles
-ln -s dotfiles/init.vim .config/nvim/init.vim
-rm $HOME/.vimrc && ln -s dotfiles/.vimrc .vimrc
-rm $HOME/.zshrc && ln -s $HOME/dotfiles/.zshrc $HOME/.zshrc
-rm $HOME/.tmux.conf && ln -s $HOME/dotfiles/.tmux.conf $HOME/.tmux.conf
-source .zshrc
 
 # Install Docker
 sudo apt-get install -y libltdl7
