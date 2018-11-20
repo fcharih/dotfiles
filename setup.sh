@@ -59,6 +59,7 @@ pip install jedi # Jedi for completion
 sudo apt-get install -y libltdl7
 wget -P temp/ https://download.docker.com/linux/ubuntu/dists/bionic/pool/stable/amd64/docker-ce_18.06.1~ce~3-0~ubuntu_amd64.deb
 sudo dpkg -i temp/docker-ce_18.06.1~ce~3-0~ubuntu_amd64.deb
+sudo usermod -aG docker $USER
 
 # Delete all temporary file
 rm -rf temp
