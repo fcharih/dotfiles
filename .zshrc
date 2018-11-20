@@ -111,8 +111,8 @@ removeallcontainers() {
 }
 
 # Other
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh # fzf
 [ -z "$TMUX"  ] && { tmux attach || exec tmux new-session && exit;} # launch tmux by default
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 ########################################################################
 
@@ -135,13 +135,15 @@ if [[ "$OSTYPE" == *"linux"* ]]; then
 email() {
 	sendmail -t < $1
 }
+export PATH="$HOME/anaconda3/bin:$PATH"
 fi
 ########################################################################
 
-export PATH="$HOME/anaconda/bin:$PATH"
 
 ##############
 echo " /\\_/\\   DO IT FOR  /\\_/\\
 ( o.o )  ROSIE AND ( o.o )
  > ^ <   TESSIE.    > ^ <"
 ##############
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

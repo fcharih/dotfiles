@@ -12,12 +12,6 @@ mkdir temp
 sudo apt-get install -y zsh
 sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 
-# Create symbolic links for my dotfiles
-rm $HOME/.vimrc && ln -s dotfiles/.vimrc .vimrc
-rm $HOME/.zshrc && ln -s $HOME/dotfiles/.zshrc $HOME/.zshrc
-rm $HOME/.tmux.conf && ln -s $HOME/dotfiles/.tmux.conf $HOME/.tmux.conf
-source .zshrc
-
 # Install Anaconda 
 curl -o temp/install_anaconda.sh https://repo.anaconda.com/archive/Anaconda3-5.3.0-Linux-x86_64.sh
 sudo bash temp/install_anaconda.sh -b # install in silent mode
@@ -31,24 +25,35 @@ sudo npm install -g yarn
 # Add gitk 
 sudo apt-get install gitk
 
-# Vim stuff
-sudo apt-get install -y neovim # Neovim
-pip install neovim # Neovim Python Client
-pip install jedi # Jedi for completion
-curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim # vim-plug
-mkdir .config
-mkdir .config/nvim
-echo "set runtimepath^=~/.vim runtimepath+=~/.vim/after
-let &packpath=&runtimepath
-source $HOME/.vimrc" > .config/nvim/init.vim
-
 # Install fzf fuzzy file finder
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 bash $HOME/.fzf/install
 
+# Vim stuff
+sudo add-apt-repository ppa:neovim-ppa/stable
+sudo apt-get update
+sudo apt-get install -y neovim # Neovim
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim # vim-plug
+mkdir .config
+sudo chown $USER:$USER .config
+sudo mkdir .config/nvim
+cat >.config/nvim/init.vim <<EOL
+set runtimepath^=~/.vim runtimepath+=~/.vim/after
+let &packpath=&runtimepath
+source $HOME/.vimrc
+EOL
+
+# Create symbolic links for my dotfiles
+rm $HOME/.vimrc && ln -s dotfiles/.vimrc .vimrc
+rm $HOME/.zshrc && ln -s $HOME/dotfiles/.zshrc $HOME/.zshrc
+rm $HOME/.tmux.conf && ln -s $HOME/dotfiles/.tmux.conf $HOME/.tmux.conf
+
+source .zshrc
+
 # Install Glances... it's a cool replacement for "top"
-pip3 install glances
+pip install glances
+pip install neovim # Neovim Python Client
+pip install jedi # Jedi for completion
 
 # Install Docker
 sudo apt-get install -y libltdl7
