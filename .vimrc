@@ -30,6 +30,10 @@ tnoremap kj <Esc>
 
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
+
+" USE OS CLIPBOARD (works on Linux)
+set clipboard=unnamedplus
+
 "=================================
 
 "==========> BEHAVIOR <===========
