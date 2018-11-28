@@ -111,7 +111,7 @@ removeallcontainers() {
 }
 
 # Other
-[ -z "$TMUX"  ] && { tmux attach || exec tmux new-session && exit;} # launch tmux by default
+[ -z "$TMUX"  ] && { tmux attach || exec tmux new-session } # launch tmux by default
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 ########################################################################
@@ -136,6 +136,7 @@ email() {
 	sendmail -t < $1
 }
 export PATH="$HOME/anaconda3/bin:$PATH"
+alias zotero="bash /home/fcharih/Software/Zotero/zotero &> /dev/null &"
 fi
 ########################################################################
 
