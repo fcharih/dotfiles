@@ -8,9 +8,14 @@
 cd $HOME
 mkdir temp
 
-# Install the zshell
-sudo apt-get install -y zsh
-sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+# Install git, gitk and setup
+sudo apt-get install -y git
+sudo apt-get install gitk
+git config --global user.email "francoischarih@sce.carleton.com"
+git config --global user.name "Francois Charih"
+
+# Install useful utils
+sudo apt-get install -y wget curl
 
 # Install Anaconda 
 curl -o temp/install_anaconda.sh https://repo.anaconda.com/archive/Anaconda3-5.3.0-Linux-x86_64.sh
@@ -21,9 +26,6 @@ sudo chown -R $USER:$USER anaconda3
 wget -qO- https://deb.nodesource.com/setup_10.x | sudo -E bash -
 sudo apt-get install -y nodejs
 sudo npm install -g yarn
-
-# Add gitk 
-sudo apt-get install gitk
 
 # Install fzf fuzzy file finder
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
@@ -42,15 +44,16 @@ set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath=&runtimepath
 source $HOME/.vimrc
 EOL
+if [ ! -f $HOME/.vimrc ]; then rm $HOME/.vimrc; fi
+ln -s dotfiles/.vimrc .vimrc # Create symlink
 
-# Create symbolic links for my dotfiles
-rm $HOME/.vimrc && ln -s dotfiles/.vimrc .vimrc
-rm $HOME/.zshrc && ln -s $HOME/dotfiles/.zshrc $HOME/.zshrc
-rm $HOME/.tmux.conf && ln -s $HOME/dotfiles/.tmux.conf $HOME/.tmux.conf
+# Install tmux
+sudo apt-get install -y tmux
+if [ ! -f $HOME/.tmux.conf ]; then rm $HOME/.tmux.conf; fi
+ln -s $HOME/dotfiles/.tmux.conf $HOME/.tmux.conf
 
-source .zshrc
-
-# Install Glances... it's a cool replacement for "top"
+# Install python-based packages
+source .zshrc # Need to source, otherwise, pip will not be on path
 pip install glances
 pip install neovim # Neovim Python Client
 pip install jedi # Jedi for completion
@@ -64,6 +67,41 @@ sudo usermod -aG docker $USER
 # Delete all temporary file
 rm -rf temp
 
-## Setup Git
-git config --global user.email "francoischarih@sce.carleton.com"
-git config --global user.name "Francois Charih"
+# Install the zshell (but do not source)
+sudo apt-get install -y zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sed '/\s*env\s\s*zsh\s*/d')"
+if [ ! -f $HOME/.zshrc ]; then rm $HOME/.zshrc; fi
+ln -s $HOME/dotfiles/.zshrc $HOME/.zshrc
+
+# Install useful software
+sudo apt-get install -y inkscape gimp thunderbird dropbox
+sudo add-apt-repository ppa:smathot/cogscinl
+sudo apt-get update
+sudo apt-get install zotero-standalone
+
+# Never suspend computer
+sudo cat > /etc/polkit-1/localauthority/50-local.d/com.ubuntu.disable-suspend.pkla <<EOL
+[Disable suspend (upower)]
+Identity=unix-user:*
+Action=org.freedesktop.upower.suspend
+ResultActive=no
+ResultInactive=no
+ResultAny=no
+
+[Disable suspend (logind)]
+Identity=unix-user:*
+Action=org.freedesktop.login1.suspend
+ResultActive=no
+ResultInactive=no
+ResultAny=no
+
+[Disable suspend when others are logged in (logind)]
+Identity=unix-user:*
+Action=org.freedesktop.login1.suspend-multiple-sessions
+ResultActive=no
+ResultInactive=no
+ResultAny=no   
+EOL
+
+# Source!
+source .zshrc
