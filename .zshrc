@@ -110,6 +110,10 @@ removeallcontainers() {
 	docker ps --all | awk '{if(NR>1) print $1}' | xargs -I{} docker container rm {}
 }
 
+# Docker fix for container name completion after adding a flag
+zstyle ':completion:*:*:docker:*' option-stacking yes
+zstyle ':completion:*:*:docker-*:*' option-stacking yes
+
 # Other
 #[ -z "$TMUX"  ] && { tmux attach || exec tmux new-session } # launch tmux by default
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
