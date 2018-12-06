@@ -94,7 +94,7 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/mysnippets']
+let g:UltiSnipsSnippetDirectories=[$HOME.'/dotfiles/.vim/mysnippets']
 let g:UltiSnipsEditSplit="vertical"
 
 "" React js stuff

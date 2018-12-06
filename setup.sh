@@ -105,5 +105,6 @@ ResultInactive=no
 ResultAny=no   
 EOL
 
+sudo apt-get install -y fonts-powerline
 # Source!
 source .zshrc
