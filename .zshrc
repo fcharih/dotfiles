@@ -96,6 +96,8 @@ export TERM=xterm-256color
 # Aliases
 alias vim='nvim'
 alias vimo='vim $(fzf)'
+alias ed='emacs --daemon'
+alias ec='emacsclient -ct'
 
 # Functions
 tunnel() {
@@ -126,11 +128,6 @@ if [[ "$OSTYPE" == *"Darwin"* ]]; then
 	export MTURK_CMD_HOME="/Users/fcharih/Dropbox/Grad School/Projects/NRCan_private/Phase II - Segmentation/aws-mturk-clt-1.3.4"
 	export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
 
-	export ANDROID_HOME=$HOME/Library/Android/sdk
-	export PATH=$PATH:$ANDROID_HOME/tools
-	export PATH=$PATH:$ANDROID_HOME/tools/bin
-	export PATH=$PATH:$ANDROID_HOME/platform-tools
-	export PATH=$PATH:$ANDROID_HOME/emulator
 fi
 ########################################################################
 
@@ -141,6 +138,12 @@ email() {
 }
 export PATH="$HOME/anaconda3/bin:$PATH"
 alias zotero="bash /home/fcharih/Software/Zotero/zotero &> /dev/null &"
+
+	export ANDROID_HOME=$HOME/Library/Android/sdk
+	export PATH=$PATH:$ANDROID_HOME/tools
+	export PATH=$PATH:$ANDROID_HOME/tools/bin
+	export PATH=$PATH:$ANDROID_HOME/platform-tools
+	export PATH=$PATH:$ANDROID_HOME/emulator
 fi
 ########################################################################
 
