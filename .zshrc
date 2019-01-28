@@ -138,6 +138,7 @@ email() {
 }
 export PATH="$HOME/anaconda3/bin:$PATH"
 alias zotero="bash /home/fcharih/Software/Zotero/zotero &> /dev/null &"
+alias saans-tablet="$HOME/Android/Sdk/emulator/emulator -avd saans-tablet"
 
 	export ANDROID_HOME=$HOME/Library/Android/sdk
 	export PATH=$PATH:$ANDROID_HOME/tools
