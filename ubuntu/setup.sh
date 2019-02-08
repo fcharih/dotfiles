@@ -27,25 +27,13 @@ wget -qO- https://deb.nodesource.com/setup_10.x | sudo -E bash -
 sudo apt-get install -y nodejs
 sudo npm install -g yarn
 
+# Install spacemacs
+sudo apt-get install -y emacs
+ln -s dotfiles/.emacs.d .emacs.d
+
 # Install fzf fuzzy file finder
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 bash $HOME/.fzf/install
-
-# Vim stuff
-sudo add-apt-repository ppa:neovim-ppa/stable
-sudo apt-get update
-sudo apt-get install -y neovim # Neovim
-curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim # vim-plug
-mkdir .config
-sudo chown $USER:$USER .config
-sudo mkdir .config/nvim
-cat >.config/nvim/init.vim <<EOL
-set runtimepath^=~/.vim runtimepath+=~/.vim/after
-let &packpath=&runtimepath
-source $HOME/.vimrc
-EOL
-if [ ! -f $HOME/.vimrc ]; then rm $HOME/.vimrc; fi
-ln -s dotfiles/.vimrc .vimrc # Create symlink
 
 # Install tmux
 sudo apt-get install -y tmux
@@ -55,8 +43,6 @@ ln -s $HOME/dotfiles/.tmux.conf $HOME/.tmux.conf
 # Install python-based packages
 source .zshrc # Need to source, otherwise, pip will not be on path
 pip install glances
-pip install neovim # Neovim Python Client
-pip install jedi # Jedi for completion
 
 # Install Docker and docker-compose
 sudo apt-get install -y libltdl7
@@ -80,31 +66,7 @@ sudo apt-get install -y inkscape gimp thunderbird dropbox
 sudo add-apt-repository ppa:smathot/cogscinl
 sudo apt-get update
 sudo apt-get install zotero-standalone
-
-# Never suspend computer
-sudo cat > /etc/polkit-1/localauthority/50-local.d/com.ubuntu.disable-suspend.pkla <<EOL
-[Disable suspend (upower)]
-Identity=unix-user:*
-Action=org.freedesktop.upower.suspend
-ResultActive=no
-ResultInactive=no
-ResultAny=no
-
-[Disable suspend (logind)]
-Identity=unix-user:*
-Action=org.freedesktop.login1.suspend
-ResultActive=no
-ResultInactive=no
-ResultAny=no
-
-[Disable suspend when others are logged in (logind)]
-Identity=unix-user:*
-Action=org.freedesktop.login1.suspend-multiple-sessions
-ResultActive=no
-ResultInactive=no
-ResultAny=no   
-EOL
-
 sudo apt-get install -y fonts-powerline
+
 # Source!
 source .zshrc

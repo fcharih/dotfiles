@@ -326,6 +326,14 @@ you should place your code here."
   ;; Activate nice interface between RefTeX and AUCTeX
   (setq reftex-plug-into-AUCTeX t)
 
+  (with-eval-after-load 'tex
+    (setq TeX-source-correlate-method 'synctex)
+    (TeX-source-correlate-mode)
+    (setq TeX-source-correlate-start-server t)
+
+    (add-to-list 'TeX-view-program-selection
+                 '(output-pdf "Okular")))
+
   ;; Remap the escape key
   (setq-default evil-escape-key-sequence "kj")
 

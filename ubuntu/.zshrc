@@ -86,18 +86,25 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
 
-########################### GENERAL SETTINGS ###########################
 # Environment variables
 export EDITOR=nvim
 export TERM=xterm-256color
 
 # Path 
+export PATH="$HOME/anaconda3/bin:$PATH"
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH=$PATH:$ANDROID_HOME/emulator
 
 # Aliases
 alias vim='nvim'
 alias vimo='vim $(fzf)'
 alias ed='emacs --daemon'
 alias ec='emacsclient -ct'
+alias zotero="bash /home/fcharih/Software/Zotero/zotero &> /dev/null &"
+alias saans-tablet="$HOME/Android/Sdk/emulator/emulator -avd saans-tablet"
 
 # Functions
 tunnel() {
@@ -112,49 +119,20 @@ removeallcontainers() {
 	docker ps --all | awk '{if(NR>1) print $1}' | xargs -I{} docker container rm {}
 }
 
+email() {
+	  sendmail -t < $1
+}
+
+# Misc & other hacks
+
 # Docker fix for container name completion after adding a flag
 zstyle ':completion:*:*:docker:*' option-stacking yes
 zstyle ':completion:*:*:docker-*:*' option-stacking yes
 
-# Other
-#[ -z "$TMUX"  ] && { tmux attach || exec tmux new-session } # launch tmux by default
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-########################################################################
-
-############################ MACOS SETTINGS ############################
-if [[ "$OSTYPE" == *"Darwin"* ]]; then
-	# For NRCan2018 project
-	export MTURK_CMD_HOME="/Users/fcharih/Dropbox/Grad School/Projects/NRCan_private/Phase II - Segmentation/aws-mturk-clt-1.3.4"
-	export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
-
-fi
-########################################################################
-
-############################ LINUX SETTINGS ############################
-if [[ "$OSTYPE" == *"linux"* ]]; then
-email() {
-	sendmail -t < $1
-}
-export PATH="$HOME/anaconda3/bin:$PATH"
-alias zotero="bash /home/fcharih/Software/Zotero/zotero &> /dev/null &"
-alias saans-tablet="$HOME/Android/Sdk/emulator/emulator -avd saans-tablet"
-
-	export ANDROID_HOME=$HOME/Library/Android/sdk
-	export PATH=$PATH:$ANDROID_HOME/tools
-	export PATH=$PATH:$ANDROID_HOME/tools/bin
-	export PATH=$PATH:$ANDROID_HOME/platform-tools
-	export PATH=$PATH:$ANDROID_HOME/emulator
-fi
-########################################################################
-
-
-##############
+# Go to home and print a sweet welcome message
+cd $HOME
 echo " /\\_/\\   DO IT FOR  /\\_/\\
 ( o.o )  ROSIE AND ( o.o )
  > ^ <   TESSIE.    > ^ <"
-##############
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-cd $HOME
