@@ -59,7 +59,7 @@ rm -rf temp
 sudo apt-get install -y zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sed '/\s*env\s\s*zsh\s*/d')"
 if [ ! -f $HOME/.zshrc ]; then rm $HOME/.zshrc; fi
-ln -s $HOME/dotfiles/.zshrc $HOME/.zshrc
+ln -s $HOME/dotfiles/ubuntu/.zshrc $HOME/.zshrc
 
 # Install useful software
 sudo apt-get install -y inkscape gimp thunderbird dropbox
