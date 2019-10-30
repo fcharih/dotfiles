@@ -100,11 +100,13 @@ export PATH=$PATH:$ANDROID_HOME/emulator
 
 # Aliases
 alias vim='nvim'
+alias ls='exa'
 alias vimo='vim $(fzf)'
 alias ed='emacs --daemon'
 alias ec='emacsclient -ct'
 alias zotero="bash /home/fcharih/Software/Zotero/zotero &> /dev/null &"
 alias saans-tablet="$HOME/Android/Sdk/emulator/emulator -avd saans-tablet"
+alias cuembs="cd ~/Projects/Misc/cuembs"
 
 # Functions
 tunnel() {
@@ -132,7 +134,6 @@ zstyle ':completion:*:*:docker-*:*' option-stacking yes
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Go to home and print a sweet welcome message
-cd $HOME
 echo " /\\_/\\   DO IT FOR  /\\_/\\
 ( o.o )  ROSIE AND ( o.o )
  > ^ <   TESSIE.    > ^ <"

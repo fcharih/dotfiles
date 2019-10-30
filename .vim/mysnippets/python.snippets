@@ -1,29 +1,23 @@
 snippet pytemplate "Francois' base template for a Python script"
-"""
-${1:`!p snip.rv = snip.basename`}$0.py
-Author: Francois Charih <francoischarih@sce.carleton.ca>
-Date created: `date +%d/%m/%y`
-
-Description: $2
-"""
 import argparse
 
 # ARGUMENT PARSER
 def parse_arguments():
     parser = argparse.ArgumentParser(description='$3')
-    $4
+    parser.add_argument('--input', '-i', type=str, required=True,
+                        help='Path to the input file.')
+	$4
     parser.add_argument('--verbose', '-v', action='store_true',
                         help='Prints EVERYTHING to the console.')
     args = parser.parse_args()
     return args
 
-def main():
-    args = parse_arguments()
-    $5
-
+def main(args):
+		$5
 
 if __name__ == '__main__':
-    main()
+    args = parse_arguments()
+    main(args)
 endsnippet
 
 snippet addarg "Add argument"
