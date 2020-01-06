@@ -88,13 +88,12 @@ source $ZSH/oh-my-zsh.sh
 
 ########################### GENERAL SETTINGS ###########################
 # Environment variables
-export EDITOR=nvim
+export EDITOR=vim
 export TERM=xterm-256color
 
 # Path 
 
 # Aliases
-alias vim='nvim'
 alias vimo='vim $(fzf)'
 alias ed='emacs --daemon'
 alias ec='emacsclient -ct'
@@ -123,11 +122,8 @@ zstyle ':completion:*:*:docker-*:*' option-stacking yes
 ########################################################################
 
 ############################ MACOS SETTINGS ############################
-if [[ "$OSTYPE" == *"Darwin"* ]]; then
-	# For NRCan2018 project
-	export MTURK_CMD_HOME="/Users/fcharih/Dropbox/Grad School/Projects/NRCan_private/Phase II - Segmentation/aws-mturk-clt-1.3.4"
-	export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
-
+if [[ "$OSTYPE" == *"darwin"* ]]; then
+    DEFAULT_USER=$USER
 fi
 ########################################################################
 

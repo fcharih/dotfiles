@@ -294,8 +294,7 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
+" Color theme
 colorscheme gruvbox
-
-let g:airline_theme='twofirewatch' " if you have Airline installed and want the associated theme
-
+set bg=dark
 highlight Pmenu ctermbg=gray guibg=gray
