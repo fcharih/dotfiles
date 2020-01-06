@@ -61,6 +61,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'YorickPeterse/happy_hacking.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'rakr/vim-two-firewatch'
+Plug 'morhetz/gruvbox'
 
 " Completion stuff
 "if has('nvim')
@@ -293,11 +294,8 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
-set background=dark " or light if you prefer the light version
-let g:two_firewatch_italics=1
-color two-firewatch
+colorscheme gruvbox
 
 let g:airline_theme='twofirewatch' " if you have Airline installed and want the associated theme
 
 highlight Pmenu ctermbg=gray guibg=gray
-
