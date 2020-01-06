@@ -87,19 +87,22 @@ source $ZSH/oh-my-zsh.sh
 #
 
 # Environment variables
-export EDITOR=nvim
+export EDITOR=vim
 export TERM=xterm-256color
 
 # Path 
 export PATH="$HOME/anaconda3/bin:$PATH"
+export PYTHONPATH="${PYTHONPATH}:/home/fcharih/pythonlibs"
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:~/scripts
 
 # Aliases
-alias vim='nvim'
+alias graham="ssh graham"
+alias grahamjobs="ssh graham 'squeue -u fcharih'"
 alias ls='exa'
 alias vimo='vim $(fzf)'
 alias ed='emacs --daemon'

@@ -7,6 +7,7 @@
 ""
 " 'cause my fingaz are lazy!
 "
+let mapleader=" "
 inoremap kj <Esc>
 
 " For autocompletion (I don't want to use dem arrows!)
@@ -16,6 +17,8 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 " Normal mode
 nnoremap <C-t> :split\|term<Enter>
 nnoremap <C-x> <C-w>
+nnoremap <Leader><right> :bnext<Enter>
+nnoremap <Leader><left> :bprevious<Enter>
 nnoremap <C-f><C-f> :FZF<Enter>
 
 " Visual mode
@@ -74,8 +77,10 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim' " Fuzzyfinder
 "Plug 'zchee/deoplete-jedi' " Python autocompletion
-Plug 'davidhalter/jedi-vim'
-Plug 'rstacruz/vim-closer' " auto-close parens
+"Plug 'davidhalter/jedi-vim'
+"Plug 'rstacruz/vim-closer' " auto-close parens
+Plug 'townk/vim-autoclose'
+
 
 "NERDTree
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
@@ -130,7 +135,9 @@ call plug#end()
 "
 autocmd FileType python setlocal ts=4 sts=4 sw=4
 autocmd FileType javascript setlocal ts=2 sts=2 sw=2
+autocmd FileType html setlocal ts=2 sts=2 sw=2
 autocmd FileType c setlocal ts=4 sts=4 sw=4 expandtab
+autocmd FileType cpp setlocal ts=4 sts=4 sw=4 expandtab
 "
 "" React files
 ""au BufNewFile,BufRead *.jsx setlocal ft=html ft=javascript
