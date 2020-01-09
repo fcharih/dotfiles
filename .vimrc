@@ -298,3 +298,7 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 colorscheme gruvbox
 set bg=dark
 highlight Pmenu ctermbg=gray guibg=gray
+
+" Fix weird backspace behavior
+set backspace=indent,eol,start
+
