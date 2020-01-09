@@ -147,6 +147,7 @@ fi
 
 ######################## RUN AT SESSION START ##########################
 tmux attach || tmux
+clear
 echo " /\\_/\\   DO IT FOR  /\\_/\\
 ( o.o )  ROSIE AND ( o.o )
  > ^ <   TESSIE.    > ^ <"
