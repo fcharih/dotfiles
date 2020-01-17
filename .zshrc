@@ -94,6 +94,7 @@ export TERM=xterm-256color
 # Path 
 
 # Aliases
+alias ls='exa'
 alias vimo='vim $(fzf)'
 alias ed='emacs --daemon'
 alias ec='emacsclient -ct'
@@ -146,7 +147,6 @@ fi
 
 
 ######################## RUN AT SESSION START ##########################
-tmux attach || tmux
 clear
 echo " /\\_/\\   DO IT FOR  /\\_/\\
 ( o.o )  ROSIE AND ( o.o )

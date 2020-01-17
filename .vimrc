@@ -22,8 +22,8 @@ nnoremap <Leader><left> :bprevious<Enter>
 nnoremap <C-f><C-f> :FZF<Enter>
 
 " Visual mode
-:vnoremap < <gv " Keep selection after indenting!
-:vnoremap > >gv
+vnoremap < <gv " Keep selection after indenting!
+vnoremap > >gv
 
 " Terminal mode
 tnoremap <Esc> <c-\><c-n>
@@ -300,6 +300,7 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 colorscheme gruvbox
 set bg=dark
 highlight Pmenu ctermbg=gray guibg=gray
+set colorcolumn=80 " Show 80 chars column
 
 " Fix weird backspace behavior
 set backspace=indent,eol,start
