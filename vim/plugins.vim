@@ -24,6 +24,7 @@ call plug#begin('~/dotfiles/vim/.vim/plugged')
   Plug 'chriskempson/base16-vim'
   Plug 'voldikss/vim-floaterm'
   Plug 'jeetsukumaran/vim-buffergator'
+  Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
 call plug#end()
 
 
