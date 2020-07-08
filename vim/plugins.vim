@@ -1,4 +1,4 @@
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/dotfiles/vim/.vim/plugged')
   Plug 'YorickPeterse/happy_hacking.vim'
   Plug 'vim-airline/vim-airline'
   Plug 'rakr/vim-two-firewatch'
@@ -22,7 +22,10 @@ call plug#begin('~/.vim/plugged')
   Plug 'w0rp/ale'
   Plug 'bagrat/vim-buffet'
   Plug 'chriskempson/base16-vim'
+  Plug 'voldikss/vim-floaterm'
+  Plug 'jeetsukumaran/vim-buffergator'
 call plug#end()
+
 
 """""""""""""" coc.nvim """""""""""""""""
 set hidden

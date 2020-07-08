@@ -13,7 +13,8 @@ nnoremap <C-t> :split\|term<Enter>
 nnoremap <C-x> <C-w>
 nnoremap <Leader><right> :bnext<Enter> " Next buffer
 nnoremap <Leader><left> :bprevious<Enter> " Previous buffer
-nnoremap <C-f><C-f> :FZF<Enter>
+nnoremap <Leader>ff :FZF<Enter>
+nnoremap <leader>ft :FloatermNew<Enter>
 
 nnoremap <leader>d "_d
 
