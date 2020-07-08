@@ -94,9 +94,11 @@ export TERM=xterm-256color
 # Path 
 
 # Aliases
+alias vim='nvim'
 alias ls='exa'
 alias vimo='vim $(fzf)'
-alias ed='emacs --daemon'
+alias emacs='/Applications/Emacs.app/Contents/MacOS/Emacs "$@" -nw'
+alias ed='/Applications/Emacs.app/Contents/MacOS/Emacs "$@" --daemon'
 alias ec='emacsclient -ct'
 
 # Functions
@@ -125,6 +127,19 @@ zstyle ':completion:*:*:docker-*:*' option-stacking yes
 ############################ MACOS SETTINGS ############################
 if [[ "$OSTYPE" == *"darwin"* ]]; then
     DEFAULT_USER=$USER
+    push_to_public() {
+	    if [ -z "$2" ]
+	    then
+	   scp -r $1 cubiccloud:/var/www/html/public/$2
+   else
+	   scp -r $1 cubiccloud:/var/www/html/public
+	    fi
+
+    }
+   push_to_cubic() {
+	   scp -r $1 cubiccloud:$2
+    }
+	export PATH=$PATH:$HOME/opt/anaconda3/bin:$HOME/.emacs.d/bin
 fi
 ########################################################################
 
@@ -154,5 +169,10 @@ echo " /\\_/\\   DO IT FOR  /\\_/\\
 ########################################################################
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export PATH="/usr/local/sbin:$PATH"
+export PATH=/usr/local/bin:$PATH
+export PYTHONPATH="/home/fcharih/opt/anaconda3/bin/python3.7"
 
-cd $HOME
+eval "$(starship init zsh)"
+
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git --exclude node_modules'

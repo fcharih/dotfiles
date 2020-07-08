@@ -1,21 +1,29 @@
 snippet pytemplate "Francois' base template for a Python script"
-import argparse
+import os
+import subprocess as sp
+import pandas as pd
+import numpy as np
 
 # ARGUMENT PARSER
 def parse_arguments():
     parser = argparse.ArgumentParser(description='$3')
     parser.add_argument('--input', '-i', type=str, required=True,
                         help='Path to the input file.')
+    parser.add_argument('--output', '-o', type=str, required=True,
+                        help='Path to the output file.')
+    parser.add_argument('--some_value', '-v', type=int, required=True,
+                        help='Path to the output file.')
+    parser.add_argument('--some_flag', '-f', action="store_true",
+                        help='Path to the output file.')
 	$4
-    parser.add_argument('--verbose', '-v', action='store_true',
-                        help='Prints EVERYTHING to the console.')
     args = parser.parse_args()
     return args
 
 def main(args):
-		$5
+    $5
 
 if __name__ == '__main__':
+    import argparse
     args = parse_arguments()
     main(args)
 endsnippet

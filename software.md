@@ -1,0 +1,15 @@
+# Software in my environment
+
+* [rust](https://www.rust-lang.org/tools/install)
+* [Starship](https://starship.rs/)
+* [bat](https://github.com/sharkdp/bat)
+* [exa](https://github.com/ogham/exa)
+* [fd](https://github.com/sharkdp/fd)
+* [zenith](https://github.com/bvaisvil/zenith)
+* [neovim](https://github.com/neovim/neovim)
+* [docker](https://docs.docker.com/engine/install/ubuntu/) 
+* [emacs-doom](https://github.com/hlissner/doom-emacs)
+* [zsh](https://github.com/ohmyzsh/ohmyzsh)
+* [node](https://github.com/nodesource/distributions/blob/master/README.md)
+* [anaconda](https://www.anaconda.com/products/individual)
+* [tmux](https://github.com/gpakosz/.tmux)

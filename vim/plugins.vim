@@ -1,162 +1,30 @@
-"" Franglois' vimrc
-"" Author: Francois Charih <francois.charih@gmail.com>
-"" Created: March 24, 2018
-"
-"
-""==========> KEYMAPS <============
-""
-" 'cause my fingaz are lazy!
-"
-let mapleader=" "
-inoremap kj <Esc>
-
-" For autocompletion (I don't want to use dem arrows!)
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-" Normal mode
-nnoremap <C-t> :split\|term<Enter>
-nnoremap <C-x> <C-w>
-nnoremap <Leader><right> :bnext<Enter>
-nnoremap <Leader><left> :bprevious<Enter>
-nnoremap <C-f><C-f> :FZF<Enter>
-
-nnoremap <leader>d "_d
-
-" Visual mode
-vnoremap < <gv " Keep selection after indenting!
-vnoremap > >gv
-
-" Terminal mode
-tnoremap <Esc> <c-\><c-n>
-tnoremap kj <Esc>
-
-" Saving and quitting...
-:command WQ wq
-:command Wq wq
-:command W w
-:command Q q
-
-
-xnoremap <leader>d "_d
-xnoremap <leader>p "_dP
-
-
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-
-" USE OS CLIPBOARD (works on Linux)
-
-"=================================
-
-"==========> BEHAVIOR <===========
-"
-" My tabs stuff
-"
-
-" Split the window below and to the right, kind of odd this is not the default IMHO
-set splitbelow
-set splitright
-""=================================
-"
-""==========> PLUGINS <============
-""
-"" 'cause you oughta plug it!
-""
 call plug#begin('~/.vim/plugged')
-Plug 'YorickPeterse/happy_hacking.vim'
-Plug 'vim-airline/vim-airline'
-Plug 'rakr/vim-two-firewatch'
-Plug 'morhetz/gruvbox'
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim' " Fuzzyfinder
-Plug 'townk/vim-autoclose'
-Plug 'lervag/vimtex'
-Plug 'jreybert/vimagit'
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-surround'
-Plug 'mattn/emmet-vim'
-Plug 'ipod825/vim-netranger'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-Plug 'mhartington/oceanic-next'
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsSnippetDirectories=[$HOME.'/dotfiles/.vim/mysnippets']
-let g:UltiSnipsEditSplit="vertical"
-
-"" React js stuff
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
-
-" Ale
-Plug 'w0rp/ale'
-
-Plug 'bagrat/vim-buffet'
-
-"" Colors :)
-Plug 'chriskempson/base16-vim'
+  Plug 'YorickPeterse/happy_hacking.vim'
+  Plug 'vim-airline/vim-airline'
+  Plug 'rakr/vim-two-firewatch'
+  Plug 'morhetz/gruvbox'
+  Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'junegunn/fzf.vim' " Fuzzyfinder
+  Plug 'townk/vim-autoclose'
+  Plug 'lervag/vimtex'
+  Plug 'jreybert/vimagit'
+  Plug 'airblade/vim-gitgutter'
+  Plug 'tpope/vim-surround'
+  Plug 'mattn/emmet-vim'
+  Plug 'ipod825/vim-netranger'
+  Plug 'SirVer/ultisnips'
+  Plug 'honza/vim-snippets'
+  Plug 'mhartington/oceanic-next'
+  Plug 'pangloss/vim-javascript'
+  Plug 'mxw/vim-jsx'
+  Plug 'w0rp/ale'
+  Plug 'bagrat/vim-buffet'
+  Plug 'chriskempson/base16-vim'
 call plug#end()
-""=================================
-""
-"
-"" Random sheetz below
-"set nocompatible              " be iMproved, required
-"filetype off                  " required
-"
-"filetype plugin indent on    " required
-"set shiftwidth=2
-"set softtabstop=2
-"set tabstop=2
 
-"
-"" React files
-""au BufNewFile,BufRead *.jsx setlocal ft=html ft=javascript
-"
-"
-"" Activate syntax highlighting
-syntax enable
-" for vim 7
- set t_Co=256
-
-" for vim 8
- if (has("termguicolors"))
-  set termguicolors
- endif
-
-colorscheme OceanicNext
-let g:airline_theme='oceanicnext'
-"syntax on
-"
-""colorscheme base16-default-dark
-"
-"" REQUIRED. This makes vim invoke Latex-Suite when you open a tex file.
-"filetype plugin on
-"
-"" IMPORTANT: win32 users will need to have 'shellslash' set so that latex
-"" can be called correctly.
-"set shellslash
-"
-"" OPTIONAL: This enables automatic indentation as you type.
-"filetype indent on
-"
-"" OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
-"" 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
-"" The following changes the default filetype back to 'tex':
-"let g:tex_flavor='latex'
-"
-" For proper React coloring (https://github.com/mxw/vim-jsx/issues/124)
-hi Tag        ctermfg=04
-hi xmlTag     ctermfg=04
-hi xmlTagName ctermfg=04
-hi xmlEndTag  ctermfg=04
-
-" TextEdit might fail if hidden is not set.
+"""""""""""""" coc.nvim """""""""""""""""
 set hidden
 
 " Some servers have issues with backup files, see #649.
@@ -306,33 +174,9 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
-" Color theme
-"colorscheme gruvbox
-"set bg=dark
-"highlight Pmenu ctermbg=gray guibg=gray
-set colorcolumn=80 " Show 80 chars column
-
-" Fix weird backspace behavior
-set backspace=indent,eol,start
-
+"""""""""""""" PRETTIER """""""""""""""""
+" Run on save for these file types
 autocmd BufWritePre *.js Prettier
 autocmd BufWritePre *.jsx Prettier
 autocmd BufWritePre *.css Prettier
 autocmd BufWritePre *.scss Prettier
-
-autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab
-autocmd FileType javascript setlocal ts=2 sts=2 sw=2 expandtab
-autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
-autocmd FileType yml setlocal ts=2 sts=2 sw=2 expandtab
-autocmd FileType js setlocal ts=2 sts=2 sw=2 expandtab
-autocmd FileType xml setlocal ts=2 sts=2 sw=2 expandtab
-autocmd FileType jsx setlocal ts=2 sts=2 sw=2 expandtab
-autocmd FileType tsx setlocal ts=2 sts=2 sw=2 expandtab
-autocmd FileType html setlocal ts=2 sts=2 sw=2 expandtab
-autocmd FileType css setlocal ts=2 sts=2 sw=2 expandtab
-autocmd FileType scss setlocal ts=2 sts=2 sw=2 expandtab
-autocmd FileType c setlocal ts=4 sts=4 sw=4 expandtab
-autocmd FileType java setlocal ts=4 sts=4 sw=4 expandtab
-autocmd FileType cpp setlocal ts=4 sts=4 sw=4 expandtab
-autocmd FileType tex setlocal ts=2 sts=2 sw=2 expandtab
-autocmd FileType vim setlocal ts=2 sts=2 sw=2 expandtab

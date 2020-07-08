@@ -1,8 +1,0 @@
-To:francoischarih@cmail.carleton.ca
-From:Francois Charih <francoischarih@sce.carleton.ca>
-Subject: This is the subject
-
-This is an email.
-
-Cheers,
-Francois

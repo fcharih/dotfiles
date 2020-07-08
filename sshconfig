@@ -1,0 +1,31 @@
+Host carletonvm 
+    Hostname 134.117.214.52
+    User francoischarih
+
+Host cedar
+    Hostname cedar.computecanada.ca
+    User fcharih
+
+Host beluga
+    Hostname beluga.computecanada.ca
+    User fcharih
+
+Host graham
+    Hostname graham.computecanada.ca
+    User fcharih
+
+Host dna28
+    Hostname dna-28.sce.carleton.ca
+    User fcharih
+
+Host workstation
+    Hostname 192.168.0.180
+    User fcharih
+
+Host biggarcluster
+    User mpiuser
+    HostName 134.117.104.160
+
+Host cubiccloud
+    User fcharih
+    Hostname cu-bic.ca
