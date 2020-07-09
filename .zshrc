@@ -157,6 +157,7 @@ alias saans-tablet="$HOME/Android/Sdk/emulator/emulator -avd saans-tablet"
 	export PATH=$PATH:$ANDROID_HOME/tools/bin
 	export PATH=$PATH:$ANDROID_HOME/platform-tools
 	export PATH=$PATH:$ANDROID_HOME/emulator
+export FZF_DEFAULT_COMMAND='fd --type f'
 fi
 ########################################################################
 
@@ -175,4 +176,4 @@ export PYTHONPATH="/home/fcharih/opt/anaconda3/bin/python3.7"
 
 eval "$(starship init zsh)"
 
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git --exclude node_modules'
+alias fd=fdfind
