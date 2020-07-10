@@ -157,7 +157,7 @@ alias saans-tablet="$HOME/Android/Sdk/emulator/emulator -avd saans-tablet"
 	export PATH=$PATH:$ANDROID_HOME/tools/bin
 	export PATH=$PATH:$ANDROID_HOME/platform-tools
 	export PATH=$PATH:$ANDROID_HOME/emulator
-export FZF_DEFAULT_COMMAND='fd --type f'
+  export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git --exclude node_modules'
 fi
 ########################################################################
 

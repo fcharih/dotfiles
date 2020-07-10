@@ -23,9 +23,9 @@ call plug#begin('~/dotfiles/vim/.vim/plugged')
   Plug 'bagrat/vim-buffet'
   Plug 'chriskempson/base16-vim'
   Plug 'voldikss/vim-floaterm'
-  Plug 'jeetsukumaran/vim-buffergator'
   Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
   Plug 'leafgarland/typescript-vim'
+  Plug 'peitalin/vim-jsx-typescript'
 call plug#end()
 
 
@@ -183,5 +183,7 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 " Run on save for these file types
 autocmd BufWritePre *.js Prettier
 autocmd BufWritePre *.jsx Prettier
+autocmd BufWritePre *.ts Prettier
+autocmd BufWritePre *.tsx Prettier
 autocmd BufWritePre *.css Prettier
 autocmd BufWritePre *.scss Prettier

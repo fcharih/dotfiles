@@ -11,12 +11,13 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 " Normal mode
 nnoremap <C-t> :split\|term<Enter>
 nnoremap <C-x> <C-w>
-nnoremap <Leader>l :bnext<Enter> " Next buffer
-nnoremap <Leader>h :bprevious<Enter> " Previous buffer
+nnoremap <Leader>ll :bnext<Enter> " Next buffer
+nnoremap <Leader>hh :bprevious<Enter> " Previous buffer
 nnoremap <Leader>ff :FZF<Enter>
 nnoremap <leader>ft :FloatermNew<Enter>
 nnoremap <leader>q :q!<Enter>
 nnoremap <leader>r :RnvimrToggle<Enter>
+nmap <space>e :CocCommand explorer<CR>
 
 nnoremap <leader>d "_d
 
