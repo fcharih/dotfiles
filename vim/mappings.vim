@@ -7,6 +7,7 @@ inoremap kj <Esc>
 " For autocompletion (I don't want to use dem arrows!)
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+imap <C-l> <Plug>(coc-snippets-expand)
 
 " Normal mode
 nnoremap <C-t> :split\|term<Enter>
