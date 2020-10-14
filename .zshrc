@@ -97,9 +97,9 @@ export TERM=xterm-256color
 alias vim='nvim'
 alias ls='exa'
 alias vimo='vim $(fzf)'
-alias emacs='/Applications/Emacs.app/Contents/MacOS/Emacs "$@" -nw'
-alias ed='/Applications/Emacs.app/Contents/MacOS/Emacs "$@" --daemon'
-alias ec='emacsclient -ct'
+#alias emacs='/Applications/Emacs.app/Contents/MacOS/Emacs "$@" -nw'
+#alias ed='/Applications/Emacs.app/Contents/MacOS/Emacs "$@" --daemon'
+#alias ec='emacsclient -ct'
 
 # Functions
 tunnel() {

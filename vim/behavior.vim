@@ -8,6 +8,8 @@ set splitright
 
 " Indentation
 setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType javascript setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType typescript setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType js setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType jsx setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType ts setlocal ts=2 sts=2 sw=2 expandtab
@@ -21,5 +23,3 @@ autocmd FileType cpp setlocal ts=4 sts=4 sw=4 expandtab
 
 
 set clipboard=unnamed
-
-set ignorecase

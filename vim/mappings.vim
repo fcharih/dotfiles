@@ -12,6 +12,7 @@ imap <C-l> <Plug>(coc-snippets-expand)
 " Normal mode
 nnoremap <C-t> :split\|term<Enter>
 nnoremap <C-x> <C-w>
+nnoremap <Leader>bd :Bdelete<Enter> " Close buffer
 nnoremap <Leader>ll :bnext<Enter> " Next buffer
 nnoremap <Leader>hh :bprevious<Enter> " Previous buffer
 nnoremap <Leader>ff :FZF<Enter>
@@ -43,4 +44,3 @@ xnoremap <leader>p "_dP
 :command Wq wq
 :command W w
 :command Q q
-
