@@ -1,2 +1,6 @@
 [onepassword]
 mode = "service"
+
+[git]
+    autoCommit = true
+    autoPush = true

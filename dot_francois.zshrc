@@ -1,14 +1,3 @@
-# oh-my-zsh config
-export ZSH=~/.oh-my-zsh
-ZSH_THEME="agnoster"
-plugins=(git docker)
-autoload -U compinit && compinit
-
-# Docker fix for container name completion after adding a flag
-zstyle ':completion:*:*:docker:*' option-stacking yes
-zstyle ':completion:*:*:docker-*:*' option-stacking yes
-source ~/.oh-my-zsh/oh-my-zsh.sh
-
 # Global
 export EDITOR=nvim
 export TERM=xterm-256color
