@@ -9,12 +9,11 @@
 
   outputs = { nixpkgs, home-manager, ... }:
   let
-    system = {{ if eq .chezmoi.os "darwin" }} "aarch64-darwin" {{ else if eq .chezmoi.os "linux" }} "x86_64-linux" {{ else }} "" {{ end }};
-
+    system = {{ if eq .chezmoi.os "darwin" }}"aarch64-darwin"{{ else if eq .chezmoi.os "linux" }}"x86_64-linux"{{ else }}"x86_64-linux"{{ end }};
     pkgs = import nixpkgs {
-    inherit system;
-    config.allowUnfree = true;
-  };
+      inherit system;
+      config.allowUnfree = true;
+    };
   in {
     homeConfigurations.fcharih = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
@@ -22,4 +21,3 @@
     };
   };
 }
-

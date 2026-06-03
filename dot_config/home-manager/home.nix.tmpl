@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   home.username = "fcharih";
-  home.homeDirectory = "/home/fcharih";   # /Users/YOURUSER on macOS
+  home.homeDirectory = {{ if eq .chezmoi.os "darwin" }}"/Users/fcharih"{{ else if eq .chezmoi.os "linux" }}"/home/fcharih"{{ else }}"/home/fcharih"{{ end }};
   home.stateVersion = "24.11";
 
   home.packages = with pkgs; [
@@ -17,8 +17,6 @@
     rustc
     eza
     volta
-    docker
-    rootlesskit
     azure-cli
     azure-storage-azcopy
     starship
