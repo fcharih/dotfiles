@@ -9,7 +9,7 @@
 
   outputs = { nixpkgs, home-manager, ... }:
   let
-    system = {{ if eq .chezmoi.os "darwin" }} "aarch64-darwin" {{ else if eq .chezmoi.os "linux" }} "x86_64-linux" {{ else }} "" {{ end }}
+    system = {{ if eq .chezmoi.os "darwin" }} "aarch64-darwin" {{ else if eq .chezmoi.os "linux" }} "x86_64-linux" {{ else }} "" {{ end }};
 
     pkgs = import nixpkgs {
     inherit system;
