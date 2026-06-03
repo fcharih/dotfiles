@@ -7,3 +7,4 @@
 ~/.config/gh/*
 ~/.config/op/*
 ~/.config/chezmoi
+**/._*
