@@ -1,0 +1,139 @@
+Host macmini
+  ProxyCommand cloudflared access ssh --hostname myserver.charih.ca
+  IdentityFile ~/.ssh/id_ed25519
+
+Host *
+  IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+
+
+
+#############################################
+# Personal
+#############################################
+Host macminilocal
+  HostName 10.5.3.6
+  IdentityFile ~/.ssh/id_ed25519
+
+#############################################
+# cuBIC
+#############################################
+Host dna-28
+  HostName dna-28.sce.carleton.ca
+  User fcharih
+  ForwardX11 yes
+  ForwardX11Trusted yes
+
+#############################################
+# NuvoBio
+#############################################
+Host whitebox
+  HostName 10.16.27.250
+  User fcharih
+
+Host VSCode-whitebox
+  HostName 10.16.27.250
+  User fcharih
+  RemoteCommand bash
+
+Host whitebox-local
+  HostName 192.168.0.113
+
+Host nuvobio-nas
+  HostName 192.168.0.100
+  ProxyJump whitebox
+  User Francois
+
+Host nuvobio-nas-local
+  HostName 192.168.0.100
+  User Francois
+
+Host DevSmall
+  HostName 20.36.138.156
+  User fcharih
+  IdentityFile ~/.ssh/NBServer
+
+
+
+Host Worker1
+  HostName 20.55.247.199
+  User fcharih
+  IdentityFile ~/.ssh/NBServer
+
+Host Worker2
+  HostName 172.175.80.118
+  User fcharih
+  IdentityFile ~/.ssh/NBServer
+
+Host Worker3
+  HostName 20.109.59.104
+  User fcharih
+  IdentityFile ~/.ssh/NBServer
+
+Host NBGPU
+  HostName 20.118.26.170
+  User fcharih
+  IdentityFile ~/.ssh/NBServer
+     
+#############################################
+# Digital Alliance
+#############################################
+Host cedar
+  HostName cedar.computecanada.ca
+  User fcharih
+
+Host cdr*
+  ProxyJump cedar
+
+Host graham
+  HostName graham.computecanada.ca
+  User fcharih
+
+Host gra* 
+  ProxyJump graham
+
+Host rorqual
+  HostName rorqual.alliancecan.ca
+
+Host nibi
+  HostName nibi.sharcnet.ca
+
+Host fir
+  HostName fir.alliancecan.ca
+
+Host vulcan
+  HostName vulcan.alliancecan.ca
+
+Host narval
+  HostName narval.alliancecan.ca
+  User fcharih
+
+Host nc????? ng????? nl?????
+  ProxyJump narval
+
+Host beluga
+  HostName beluga.computecanada.ca
+  User fcharih
+
+Host mist
+  HostName mist.scinet.utoronto.ca
+  User fcharih
+
+Host niagara
+  HostName niagara.scinet.utoronto.ca
+  User fcharih
+
+Host cubiccloud
+  User fcharih
+  HostName 206.12.88.119
+  IdentityFile ~/.ssh/cubiccloud
+
+
+#############################################
+# Other
+#############################################
+Host cancercomputer
+  User fcharih
+  HostName 130.15.59.24
+
+
+

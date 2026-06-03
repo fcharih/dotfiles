@@ -1,0 +1,9 @@
+[init]
+	defaultBranch = main
+[user]
+	name = Francois Charih
+	email = francois@charih.ca
+[pull]
+        rebase = true
+[core]
+	hooksPath = .githooks

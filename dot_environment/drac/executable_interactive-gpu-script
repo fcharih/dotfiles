@@ -1,0 +1,14 @@
+#! /bin/bash
+
+#SBATCH --account=def-jrgreen
+#SBATCH --job-name="gpu-interactive"
+#SBATCH --time=2:00:00
+#SBATCH --mem 32G
+#SBATCH --ntasks 1
+#SBATCH --cpus-per-task=32
+#SBATCH --gpus-per-node=1
+#SBATCH --output=/scratch/fcharih/logs/gpu-interactive-%j.log
+
+currenthost=$(hostname)
+notify "Interactive CPU allocation ready! Host: $currenthost"
+/usr/sbin/sshd -D -p 2222 -f /dev/null -h ${HOME}/.ssh/id_rsa # uses the user key as the host key

@@ -1,0 +1,90 @@
+#! /usr/bin/env python3
+import sys
+import time
+import subprocess as sp
+import os
+import argparse
+from typing import List
+
+STATUS = {
+    'R': 'Running',
+    'CG': 'Stopping',
+    'PD': 'Pending'
+}
+
+def get_jobs() -> List[dict]:
+    jobs_as_strings = sp.check_output('sq', shell=True).decode('utf-8').splitlines()[1:]
+    jobs = []
+    for job_string in jobs_as_strings:
+        job_elements = job_string.split()
+        jobs.append({
+            'id': job_elements[0],
+            'name': job_elements[3],
+            'status': job_elements[4],
+            'time_left': job_elements[5],
+            'num_nodes': job_elements[6],
+            'num_cpus': job_elements[7],
+            'tres_per_n': job_elements[8],
+            'memory': job_elements[9],
+            'node_list': " ".join(job_elements[10:]),
+        })
+    return jobs
+
+def parse_rangestring(rangestring):
+    start, end = rangestring.split('-')
+    return list(range(int(start), int(end) + 1))
+
+def parse_selection(selection) -> List[int]:
+    selection = selection.replace(' ', '')
+    
+    if ',' not in selection and '-' not in selection:
+        return [int(selection)]
+    
+    if ',' not in selection and '-' in selection:
+        return parse_rangestring(selection)
+    
+    if ',' in selection:
+        selections = selection.split(',')
+        
+        combination = [] 
+        for sel in selections:
+            if '-' in sel:
+                combination += parse_rangestring(sel)
+            else:
+                combination += [int(sel)]
+                
+        return combination
+
+def main(args):
+    jobs = get_jobs()
+    
+    if len(jobs) == 0:
+        print('No jobs to cancel!')
+        sys.exit(0)
+    
+    for i, job in enumerate(jobs):
+        print("{} - {} {} - {}".format(i + 1, job['name'], job['id'], job['status']))
+        
+    choice = parse_selection(input('What job(s) do you want to cancel (eg: `1`, `3-6`, `1,2,3`, `1,4-10,19`)\n>'))
+    jobs = [jobs[c - 1] for c in choice]
+    
+    for job in jobs:
+        
+        if job['status'] == 'Stopping':
+            print(f'WARNING: {job["id"]} ({job["name"]}) is stopping, so it could not be stopped.')
+            
+        result = sp.run(f'scancel {job["id"]}', shell=True)
+        
+        if result.returncode == 0:
+            print(f'OK: Job {job["id"]} ({job["name"]}) currently {job["status"]} cancelled.')
+        else:
+            print(f'WARNING: Job {job["id"]} ({job["name"]}) currently {job["status"]} could not be cancelled.')
+            
+        time.sleep(0.5)
+    
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    args = vars(parser.parse_args())
+
+    main(args)

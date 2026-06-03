@@ -1,0 +1,9 @@
+.DS_Store
+**/__pycache__
+**/history.txt
+**/env.nu
+**/*.msgpackz
+**/lazy-lock.json
+~/.config/gh/*
+~/.config/op/*
+~/.config/chezmoi

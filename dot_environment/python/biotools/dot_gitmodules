@@ -1,0 +1,3 @@
+[submodule "cdhit"]
+	path = libs/cdhit
+	url = https://github.com/weizhongli/cdhit.git

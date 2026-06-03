@@ -1,0 +1,32 @@
+#! /usr/bin/env python3
+import os
+import pathlib
+import subprocess as sp
+from types import SimpleNamespace
+
+HOMEDIR = pathlib.Path.home()
+LOGSDIR = os.path.join(HOMEDIR, 'scratch', 'logs')
+
+logs = []
+
+for filename in os.listdir(LOGSDIR):
+    filepath = os.path.join(LOGSDIR, filename)
+    stat = os.stat(filepath)
+    logs.append({
+        'filename': filename,
+        'filepath': filepath,
+        'creation_time': stat.st_ctime
+    })
+                                            
+logs = sorted(logs, key=lambda f: f['creation_time'], reverse=True)
+
+
+print('\n\n============RECENT LOGS===============')
+for i, log in enumerate(logs):
+    log = SimpleNamespace(**log)
+    print(f'{i + 1} - {log.filename}')
+print('==========================================')
+
+choice = input("What log to print?\n>")
+sp.run(f'cat {logs[int(choice) - 1]["filepath"]}', shell=True)
+print('\n')

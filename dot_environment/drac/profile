@@ -1,0 +1,10 @@
+source $HOME/.env
+
+# Path
+export PATH=$PATH:$HOME/.environment/computecanada
+export PATH=$PATH:$HOME/.cargo/bin
+
+# Aliases
+alias gpualloc="sbatch $HOME/.environment/computecanada/interactive-gpu-script"
+alias cpualloc="sbatch $HOME/.environment/computecanada/interactive-cpu-script"
+alias exit="exit; exit"

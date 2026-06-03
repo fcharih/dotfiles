@@ -1,0 +1,3 @@
+return {
+  "dangooddd/pyrepl.nvim",
+}
