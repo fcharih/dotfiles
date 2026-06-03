@@ -4,6 +4,7 @@ Host macmini
 
 Host *
   IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+  ForwardAgent yes
 
 
 
@@ -50,29 +51,24 @@ Host nuvobio-nas-local
 Host DevSmall
   HostName 20.36.138.156
   User fcharih
-  IdentityFile ~/.ssh/NBServer
 
 
 
 Host Worker1
   HostName 20.55.247.199
   User fcharih
-  IdentityFile ~/.ssh/NBServer
 
 Host Worker2
   HostName 172.175.80.118
   User fcharih
-  IdentityFile ~/.ssh/NBServer
 
 Host Worker3
   HostName 20.109.59.104
   User fcharih
-  IdentityFile ~/.ssh/NBServer
 
 Host NBGPU
   HostName 20.118.26.170
   User fcharih
-  IdentityFile ~/.ssh/NBServer
      
 #############################################
 # Digital Alliance
@@ -125,7 +121,6 @@ Host niagara
 Host cubiccloud
   User fcharih
   HostName 206.12.88.119
-  IdentityFile ~/.ssh/cubiccloud
 
 
 #############################################
