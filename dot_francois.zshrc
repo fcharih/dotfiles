@@ -19,6 +19,10 @@ export PATH=$PATH:$HOME/.environment/commands
 export PATH=$PATH:$HOME/.environment/commands/nuvobio
 export PATH=$PATH:$HOME/.pyenv/shims
 
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
+fi
+
 # Pythonpath
 export PYTHONPATH=$PYTHONPATH:$HOME/.environment/python
 
