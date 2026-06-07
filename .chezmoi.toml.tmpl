@@ -4,3 +4,6 @@
 
 [onepassword]
     mode = "service"
+
+[data]
+    environment = {{ include (joinPath .chezmoi.homeDir ".env") | quote }}
