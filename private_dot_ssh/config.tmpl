@@ -2,6 +2,11 @@ Host macmini
   ProxyCommand cloudflared access ssh --hostname myserver.charih.ca
   IdentityFile ~/.ssh/id_ed25519
 
+
+Host dell
+  ProxyCommand cloudflared access ssh --hostname dell.charih.ca
+  IdentityFile ~/.ssh/id_ed25519
+
 Host rpi
   ProxyCommand cloudflared access ssh --hostname pi.charih.ca
   IdentityFile ~/.ssh/id_ed25519
