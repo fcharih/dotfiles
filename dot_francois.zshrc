@@ -28,7 +28,7 @@ alias activate='source .venv/bin/activate' # always use verbose mode
 export CARGO_NET_GIT_FETCH_WITH_CLI=true
 
 eval "$(starship init zsh)"
-eval "$(~/.nix-profile/bin/mise activate zsh)"
+eval "$(~/.local/bin/mise activate zsh)"
 
-. $HOME/.nix-profile/etc/profile.d/nix.sh
+. $HOME/.nix-profile/bin
 . $HOME/.francois.env
