@@ -123,9 +123,6 @@ fi
 export EDITOR=nvim
 export TERM=xterm-256color
 
-# Environment variables
-source $HOME/.tokens
-
 # Path
 export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$HOME/.cargo/bin
@@ -141,3 +138,6 @@ alias activate='source env/bin/activate' # always use verbose mode
 
 # Fetch git repos with CLI when using Cargo
 export CARGO_NET_GIT_FETCH_WITH_CLI=true
+
+. $HOME/.nix-profile/etc/profile.d/nix.sh
+. $HOME/.francois.env

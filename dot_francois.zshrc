@@ -29,3 +29,6 @@ export CARGO_NET_GIT_FETCH_WITH_CLI=true
 
 eval "$(starship init zsh)"
 eval "$(~/.nix-profile/bin/mise activate zsh)"
+
+. $HOME/.nix-profile/etc/profile.d/nix.sh
+. $HOME/.francois.env
