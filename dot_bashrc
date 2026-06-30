@@ -139,7 +139,7 @@ alias activate='source env/bin/activate' # always use verbose mode
 # Fetch git repos with CLI when using Cargo
 export CARGO_NET_GIT_FETCH_WITH_CLI=true
 
-if [ -t 1 ]; then
+if [ -f $HOME/.nix-profile/bin/zsh ] && [ -t 1 ]; then
   export SHELL=$HOME/.nix-profile/bin/zsh
   exec $HOME/.nix-profile/bin/zsh
 fi
