@@ -116,41 +116,30 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# If I'm using the BASH shell, it's because I'm on a DAC cluster,
+# because otherwise, I'd be using Zsh...
+
 # Global
 export EDITOR=nvim
 export TERM=xterm-256color
-
-# Private tokens
-. $HOME/.tokens
 
 # Path
 export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$HOME/.cargo/bin
 export PATH=$PATH:$HOME/.environment/commands
-export PATH=$PATH:$HOME/.environment/commands
-export PATH=$PATH:$HOME/.environment/commands/nuvobio
-
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
-fi
+export PATH=$PATH:$HOME/.environment/computecanada
+export PATH=$PATH:/home/linuxbrew/.linuxbrew/bin
 
 # Pythonpath
 export PYTHONPATH=$PYTHONPATH:$HOME/.environment/python
 
-# Aliases
-alias vim="nvim"
-alias ls='eza'
-alias rsync='rsync --progress -v'          # always use verbose mode
-alias activate='source .venv/bin/activate' # always use verbose mode
+alias rsync='rsync --progress -v'        # always use verbose mode
+alias activate='source env/bin/activate' # always use verbose mode
 
 # Fetch git repos with CLI when using Cargo
 export CARGO_NET_GIT_FETCH_WITH_CLI=true
 
-eval "$(starship init zsh)"
-eval "$(mise activate zsh)"
-
-. $HOME/.nix-profile/bin
-
-if [ -f $HOME/.nix-profile/bin/zsh ]; then
+if [ -t 1 ]; then
+  export SHELL=$HOME/.nix-profile/bin/zsh
   exec $HOME/.nix-profile/bin/zsh
 fi
