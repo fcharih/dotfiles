@@ -27,9 +27,10 @@ unset opt set_opts
 export EDITOR=nvim
 export TERM=xterm-256color
 
-# Environment variables
-for f in $HOME/.tokens/*; do source "$f"; done
+# Private tokens
+. $HOME/.tokens
 
+# Path
 export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$HOME/.cargo/bin
 export PATH=$PATH:$HOME/.environment/commands
@@ -56,4 +57,3 @@ eval "$(starship init zsh)"
 eval "$(mise activate zsh)"
 
 . $HOME/.nix-profile/bin
-. $HOME/.francois.env
