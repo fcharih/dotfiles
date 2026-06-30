@@ -6,4 +6,4 @@
     mode = "service"
 
 [data]
-    environment = {{ include (joinPath .chezmoi.homeDir ".env") | trimSuffix "\n" | quote }}
+    environment = {{ env "ENVIRONMENT" }}
