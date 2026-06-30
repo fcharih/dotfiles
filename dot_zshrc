@@ -1,16 +1,40 @@
+plugins=(git sudo docker)
+ZSH_THEME=robbyrussell
+source $ZSH/oh-my-zsh.sh
+
+# History options should be set in .zshrc and after oh-my-zsh sourcing.
+# See https://github.com/nix-community/home-manager/issues/177.
+HISTSIZE="10000"
+SAVEHIST="10000"
+
+HISTFILE="/home/fcharih/.zsh_history"
+mkdir -p "$(dirname "$HISTFILE")"
+
+# Set shell options
+set_opts=(
+  HIST_FCNTL_LOCK HIST_IGNORE_DUPS HIST_IGNORE_SPACE SHARE_HISTORY
+  NO_APPEND_HISTORY NO_EXTENDED_HISTORY NO_HIST_EXPIRE_DUPS_FIRST
+  NO_HIST_FIND_NO_DUPS NO_HIST_IGNORE_ALL_DUPS NO_HIST_SAVE_NO_DUPS
+)
+for opt in "${set_opts[@]}"; do
+  setopt "$opt"
+done
+unset opt set_opts
+
+########## My stuff 
+
 # Global
 export EDITOR=nvim
 export TERM=xterm-256color
 
 # Environment variables
-source .tokens
+for f in $HOME/.tokens/*; do source "$f"; done
 
 export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$HOME/.cargo/bin
 export PATH=$PATH:$HOME/.environment/commands
 export PATH=$PATH:$HOME/.environment/commands
 export PATH=$PATH:$HOME/.environment/commands/nuvobio
-export PATH=$PATH:$HOME/.nix-profile/bin
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
   export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
@@ -21,8 +45,6 @@ export PYTHONPATH=$PYTHONPATH:$HOME/.environment/python
 
 # Aliases
 alias vim="nvim"
-alias docker="podman"
-alias "pcompose"="podman compose"
 alias ls='eza'
 alias rsync='rsync --progress -v' # always use verbose mode
 alias activate='source .venv/bin/activate' # always use verbose mode
@@ -31,4 +53,7 @@ alias activate='source .venv/bin/activate' # always use verbose mode
 export CARGO_NET_GIT_FETCH_WITH_CLI=true
 
 eval "$(starship init zsh)"
-eval "$(~/.local/bin/mise activate zsh)"
+eval "$(mise activate zsh)"
+
+. $HOME/.nix-profile/bin
+. $HOME/.francois.env
