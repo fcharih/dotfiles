@@ -8,7 +8,6 @@ HISTSIZE="10000"
 SAVEHIST="10000"
 
 HISTFILE="/home/fcharih/.zsh_history"
-mkdir -p "$(dirname "$HISTFILE")"
 
 # Set shell options
 set_opts=(
