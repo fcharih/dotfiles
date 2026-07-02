@@ -1,0 +1,8 @@
+#! /bin/bash
+
+az network bastion tunnel \
+--name "nuvobioadmin-bastion" \
+--resource-group "nuvobioadmin" \
+--target-resource-id "/subscriptions/1f193b1b-79bd-4c43-bbc3-82caf4c7607a/resourceGroups/nuvobioadmin/providers/Microsoft.Compute/virtualMachines/$1" \
+--resource-port $2 \
+--port $3

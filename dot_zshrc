@@ -7,7 +7,7 @@ source $HOME/.nix-profile/share/oh-my-zsh/oh-my-zsh.sh
 HISTSIZE="10000"
 SAVEHIST="10000"
 
-HISTFILE="/home/fcharih/.zsh_history"
+HISTFILE="$HOME/.zsh_history"
 
 # Set shell options
 set_opts=(
@@ -32,7 +32,6 @@ export TERM=xterm-256color
 # Path
 export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$HOME/.cargo/bin
-export PATH=$PATH:$HOME/.environment/commands
 export PATH=$PATH:$HOME/.environment/commands
 export PATH=$PATH:$HOME/.environment/commands/nuvobio
 
