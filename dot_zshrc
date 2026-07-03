@@ -47,6 +47,7 @@ alias vim="nvim"
 alias ls='eza'
 alias rsync='rsync --progress -v' # always use verbose mode
 alias activate='source .venv/bin/activate' # always use verbose mode
+alias nix-update="nix run home-manager/master -- switch --flake ~/.config/home-manager -b backup"
 
 # Fetch git repos with CLI when using Cargo
 export CARGO_NET_GIT_FETCH_WITH_CLI=true
