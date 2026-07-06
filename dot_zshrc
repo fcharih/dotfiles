@@ -52,6 +52,9 @@ alias nix-update="nix run home-manager/master -- switch --flake ~/.config/home-m
 # Fetch git repos with CLI when using Cargo
 export CARGO_NET_GIT_FETCH_WITH_CLI=true
 
+eval "$(ssh-agent -s)"
+find ~/.ssh -type f -exec grep -l ".pem" {} + | xargs -I {} ssh-add {}
+
 eval "$(starship init zsh)"
 eval "$(mise activate zsh)"
 
