@@ -11,7 +11,7 @@ def get_output(cmd, in_json=False):
     return result.stdout
 
 # Sign into 1Password
-cmd = "op signin"
+cmd = 'eval "$(op signin)"'
 sp.run(cmd, shell=True)
 
 # Retrieve all the vaults containing the word "SSH"
