@@ -1,6 +1,7 @@
 #! /usr/bin/env python3
 import json
 import pathlib
+import os
 import subprocess as sp
 
 def get_output(cmd, in_json=False):
@@ -31,8 +32,10 @@ for vault in ssh_vaults:
         print(f"Loading key {key_index}/{total_keys}")
         cmd = f'op read "op://{vault["name"]}/{item["title"]}/private key"'
         key = get_output(cmd)
-        with open(pathlib.Path.home() / ".ssh" / f"{item['title'].replace(' ', '_')}.pem", "w") as ofile:
+        filepath = pathlib.Path.home() / ".ssh" / f"{item['title'].replace(' ', '_')}.pem"
+        with open(filepath, "w") as ofile:
             ofile.write(key)
+        os.chmod(filepath, 0o600)
         ssh_keys.append(key)
         key_index += 1
 
