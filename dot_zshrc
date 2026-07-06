@@ -53,7 +53,7 @@ alias nix-update="nix run home-manager/master -- switch --flake ~/.config/home-m
 export CARGO_NET_GIT_FETCH_WITH_CLI=true
 
 eval "$(ssh-agent -s)"
-find ~/.ssh -type f -exec grep -l ".pem" {} + | xargs -I {} ssh-add {}
+grep -slR "PRIVATE" ~/.ssh/
 
 eval "$(starship init zsh)"
 eval "$(mise activate zsh)"
