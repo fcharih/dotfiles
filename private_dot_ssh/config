@@ -1,7 +1,9 @@
+#############################################
+# Personal
+#############################################
 Host macmini
   ProxyCommand cloudflared access ssh --hostname myserver.charih.ca
   IdentityFile ~/.ssh/id_ed25519
-
 
 Host dell
   ProxyCommand cloudflared access ssh --hostname dell.charih.ca
@@ -11,15 +13,6 @@ Host rpi
   ProxyCommand cloudflared access ssh --hostname pi.charih.ca
   IdentityFile ~/.ssh/id_ed25519
 
-Host *
-  {{ if eq .chezmoi.os "darwin" }}IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"{{ else }}{{ end }}
-  ForwardAgent yes
-
-
-
-#############################################
-# Personal
-#############################################
 Host macminilocal
   HostName 10.5.3.6
   IdentityFile ~/.ssh/id_ed25519
