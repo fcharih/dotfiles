@@ -49,7 +49,7 @@ alias rsync='rsync --progress -v' # always use verbose mode
 alias activate='source .venv/bin/activate' # always use verbose mode
 alias nix-update="nix run home-manager/master -- switch --flake ~/.config/home-manager -b backup"
 alias azlogin="az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID"
-alias azcopy="AZCOPY_SPA_CLIENT_SECRET=$AZURE_CLIENT_SECRET azcopy login --service-principal --client-id $AZURE_CLIENT_ID --tenant-id $AZURE_TENANT_ID"
+alias azcopylogin="AZCOPY_SPA_CLIENT_SECRET=$AZURE_CLIENT_SECRET azcopy login --service-principal --client-id $AZURE_CLIENT_ID --tenant-id $AZURE_TENANT_ID"
 
 # Fetch git repos with CLI when using Cargo
 export CARGO_NET_GIT_FETCH_WITH_CLI=true
