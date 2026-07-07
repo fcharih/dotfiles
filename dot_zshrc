@@ -58,7 +58,7 @@ eval "$(ssh-agent -s)"
 
 eval "$(starship init zsh)"
 eval "$(mise activate zsh)"
-grep -slR "PRIVATE" ~/.ssh/ | xargs ssh-add
+grep -slR "PRIVATE" ~/.ssh/ | xargs ssh-add -q
 
 
 . $HOME/.nix-profile/bin
