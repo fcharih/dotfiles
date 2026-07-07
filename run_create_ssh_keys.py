@@ -10,10 +10,6 @@ def get_output(cmd, in_json=False):
         return json.loads(result.stdout)
     return result.stdout
 
-# Sign into 1Password
-cmd = 'eval "$(op signin)"'
-sp.run(cmd, shell=True)
-
 # Retrieve all the vaults containing the word "SSH"
 cmd = "op vault list --format=json"
 vaults = get_output(cmd, in_json=True)
