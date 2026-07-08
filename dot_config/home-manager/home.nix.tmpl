@@ -5,34 +5,7 @@
   home.stateVersion = "24.11";
 
   home.packages = with pkgs; [
-	claude-code
-	claude-code
-	claude-code
-	claude-code
-	claude-code
-claude-code
-
-    ripgrep
-    fd
-    htop
-    jq
-    fzf
-    neovim
-    uv
-    zsh
-    eza
-    azure-cli
-    azure-storage-azcopy
-    starship
-    oh-my-zsh
-    _1password-cli
-    chezmoi
-    gh
-    mise
-    podman
-    podman-compose
-    buildah
-    skopeo
+    lib.splitString "\n" (builtins.readFile ./packages.txt)
   ];
 
   programs.home-manager.enable = true;
