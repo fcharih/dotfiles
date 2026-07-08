@@ -5,8 +5,7 @@
   home.stateVersion = "24.11";
 
   home.packages = with pkgs; [
-		ripgrepnfdnhtopnjqnfzfnneovimnuvnzshnezanazure-clinazure-storage-azcopynstarshipnoh-my-zshn_1password-clinchezmoinghnmisenpodmannpodman-composenbuildahnskopeonclaude-codenclaude-code
-		claude-code
+    {{ include "./dot_config/home-manager/packages.txt" }}
   ];
 
   programs.home-manager.enable = true;
