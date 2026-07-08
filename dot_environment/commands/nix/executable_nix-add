@@ -9,7 +9,7 @@ cmd = f"NIXPKGS_ALLOW_UNFREE=1 nix profile add --impure {' '.join([f'nixpkgs#{pk
 result = sp.run(cmd, shell=True)
 
 if result.returncode == 0:
-    home_nix_path = pathlib.Path.home() / '.local' / 'share' / 'chezmoi' / 'dot_config' / 'home-manager' / 'home.nix'
+    home_nix_path = pathlib.Path.home() / '.local' / 'share' / 'chezmoi' / 'dot_config' / 'home-manager' / 'home.nix.tmpl'
     packages_list_path = pathlib.Path.home() / '.local' / 'share' / 'chezmoi' / 'dot_config' / 'home-manager' / 'packages.txt'
     new_package_list = open(packages_list_path).read().splitlines() + packages
     with open(packages_list_path, "w") as ofile:
