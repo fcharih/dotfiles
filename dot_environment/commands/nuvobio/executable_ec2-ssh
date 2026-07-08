@@ -1,0 +1,40 @@
+#! /usr/bin/env python3
+
+import argparse
+import sys
+import os
+import subprocess as sp
+
+import boto3
+
+from ec2 import *
+
+parser = argparse.ArgumentParser()
+parser.add_argument('-s', '--spot_only', required=False, action='store_true', help='List spot instances only.')
+parser.add_argument('-r', '--reserved_only', required=False, action='store_true', help='List reserved instances only.')
+parser.add_argument('-c', '--command', required=False, type=str, help='Command to execute on the instance.')
+args = vars(parser.parse_args())
+
+instances = get_all_instances()
+
+if args['spot_only'] and args['reserved_only']:
+    raise 'Cannot request spot only and reserved only... makes no sense, bro.'
+
+if args['spot_only']:
+    instances = [inst for inst in instances if inst.reservation_type == 'spot']
+
+if args['reserved_only']:
+    instances = [inst for inst in instances if inst.reservation_type == 'reserved']
+
+selected_instance = select_instance(instances, "Which instance do you want to SSH into?" )
+
+# Get the Public DNS name
+public_dns_name = selected_instance.public_dns
+
+# SSH
+ssh_command = f'ssh -i ~/.ssh/darwin -o StrictHostKeyChecking=accept-new ubuntu@{public_dns_name}'
+
+if args['command']:
+    ssh_command += f' \"{args["command"]}\"'
+
+sp.run(ssh_command, shell=True)

@@ -1,0 +1,8 @@
+#! /usr/bin/env python3
+import subprocess as sp
+import sys
+
+packages = [f"nixpkgs#{pkg}" for pkg in sys.argv[1:]]
+
+cmd = f"NIXPKGS_ALLOW_UNFREE=1 nix profile add --impure {' '.join(packages)}"
+sp.run(cmd, shell=True)

@@ -1,0 +1,2 @@
+#! /bin/bash
+echo $(op read op://Personal/Mac/password) | sudo -S openconnect-sso -s cuvpn.carleton.ca/mfa

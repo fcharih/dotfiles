@@ -1,0 +1,301 @@
+#!/usr/bin/env python3
+"""
+azure_vm_manager.py — Interactive Azure VM Manager
+Requires: Azure CLI (az) installed and authenticated (az login)
+"""
+
+import json
+import os
+import shutil
+import subprocess
+import sys
+import time
+from typing import Optional, Union
+
+
+# ── ANSI colours ──────────────────────────────────────────────────────────────
+class Colour:
+    RED    = "\033[0;31m"
+    GREEN  = "\033[0;32m"
+    YELLOW = "\033[1;33m"
+    CYAN   = "\033[0;36m"
+    BOLD   = "\033[1m"
+    RESET  = "\033[0m"
+
+
+def success(msg: str) -> None:
+    print(f"{Colour.GREEN}✔  {msg}{Colour.RESET}")
+
+def error(msg: str) -> None:
+    print(f"{Colour.RED}✘  {msg}{Colour.RESET}")
+
+def info(msg: str) -> None:
+    print(f"{Colour.CYAN}ℹ  {msg}{Colour.RESET}")
+
+def warn(msg: str) -> None:
+    print(f"{Colour.YELLOW}⚠  {msg}{Colour.RESET}")
+
+def bold(msg: str) -> str:
+    return f"{Colour.BOLD}{msg}{Colour.RESET}"
+
+def yellow(msg: str) -> str:
+    return f"{Colour.YELLOW}{msg}{Colour.RESET}"
+
+
+# ── Utility helpers ───────────────────────────────────────────────────────────
+def clear_screen() -> None:
+    os.system("cls" if os.name == "nt" else "clear")
+
+
+def print_header() -> None:
+    clear_screen()
+    print(f"{Colour.CYAN}{Colour.BOLD}")
+    print("╔══════════════════════════════════════════╗")
+    print("║        Azure VM Manager  ☁              ║")
+    print("╚══════════════════════════════════════════╝")
+    print(Colour.RESET)
+
+
+def pause() -> None:
+    print()
+    input("Press [Enter] to return to the menu… ")
+
+
+def run_az(*args: str, capture: bool = True) -> subprocess.CompletedProcess:
+    """Run an az CLI command. Returns the CompletedProcess result."""
+    cmd = ["az", *args]
+    return subprocess.run(
+        cmd,
+        capture_output=capture,
+        text=True,
+    )
+
+
+def az_json(*args: str) -> Optional[Union[list, dict]]:
+    """Run an az command that returns JSON; return parsed object or None."""
+    result = run_az(*args, "--output", "json", capture=True)
+    if result.returncode != 0:
+        return None
+    try:
+        return json.loads(result.stdout)
+    except json.JSONDecodeError:
+        return None
+
+
+# ── Preflight check ───────────────────────────────────────────────────────────
+def check_az_cli() -> None:
+    if shutil.which("az") is None:
+        error("Azure CLI is not installed. Visit https://aka.ms/installazurecli")
+        sys.exit(1)
+
+    result = run_az("account", "show", capture=True)
+    if result.returncode != 0:
+        warn("You are not logged in to Azure. Running 'az login'…")
+        login = run_az("login", capture=False)
+        if login.returncode != 0:
+            error("Login failed. Exiting.")
+            sys.exit(1)
+
+
+# ── Pickers ───────────────────────────────────────────────────────────────────
+def pick_resource_group() -> Optional[str]:
+    """List resource groups and let the user pick one. Returns name or None."""
+    print(f"\n{bold('Available Resource Groups:')}")
+
+    data = az_json("group", "list", "--query", "[].name")
+    if not data:
+        error("No resource groups found in the current subscription.")
+        return None
+
+    groups: list[str] = sorted(data)
+    for i, name in enumerate(groups, start=1):
+        print(f"  {yellow(f'{i:>2}')}) {name}")
+
+    print()
+    while True:
+        raw = input(f"Select a resource group [1-{len(groups)}]: ").strip()
+        if raw.isdigit():
+            idx = int(raw)
+            if 1 <= idx <= len(groups):
+                chosen = groups[idx - 1]
+                success(f"Resource group: {bold(chosen)}")
+                return chosen
+        error("Invalid selection, try again.")
+
+
+def pick_vm(resource_group: str, prompt: str = "Select a VM") -> Optional[str]:
+    """List VMs in a resource group and let the user pick one. Returns name or None."""
+    _vm_header = "VMs in '" + resource_group + "':"
+    print(f"\n{bold(_vm_header)}")
+
+    data = az_json("vm", "list", "-g", resource_group, "--query", "[].name")
+    if not data:
+        warn(f"No VMs found in resource group '{resource_group}'.")
+        return None
+
+    vms: list[str] = sorted(data)
+    for i, name in enumerate(vms, start=1):
+        print(f"  {yellow(f'{i:>2}')}) {name}")
+
+    print()
+    while True:
+        raw = input(f"{prompt} [1-{len(vms)}]: ").strip()
+        if raw.isdigit():
+            idx = int(raw)
+            if 1 <= idx <= len(vms):
+                return vms[idx - 1]
+        error("Invalid selection, try again.")
+
+
+# ── Actions ───────────────────────────────────────────────────────────────────
+def list_vms() -> None:
+    print_header()
+    print(f"{bold('── List VMs ────────────────────────────────')}\n")
+
+    rg = pick_resource_group()
+    if not rg:
+        pause()
+        return
+
+    _status_header = "VM Status in '" + rg + "':"
+    print(f"\n{bold(_status_header)}\n")
+
+    # Fetch detailed VM info
+    query = "[].{Name:name, Size:hardwareProfile.vmSize, State:powerState, OS:storageProfile.osDisk.osType}"
+    data = az_json("vm", "list", "-g", rg, "--show-details", "--query", query)
+
+    if not data:
+        error("Could not retrieve VM list.")
+        pause()
+        return
+
+    if not data:
+        warn("No VMs found.")
+        pause()
+        return
+
+    # Pretty-print as a table
+    col_widths = {"Name": 4, "Size": 4, "State": 5, "OS": 2}
+    for vm in data:
+        col_widths["Name"]  = max(col_widths["Name"],  len(vm.get("Name")  or ""))
+        col_widths["Size"]  = max(col_widths["Size"],  len(vm.get("Size")  or ""))
+        col_widths["State"] = max(col_widths["State"], len(vm.get("State") or ""))
+        col_widths["OS"]    = max(col_widths["OS"],    len(vm.get("OS")    or ""))
+
+    headers = ["Name", "Size", "State", "OS"]
+    header_row = "  ".join(h.ljust(col_widths[h]) for h in headers)
+    separator  = "  ".join("-" * col_widths[h] for h in headers)
+
+    print(f"{Colour.BOLD}{header_row}{Colour.RESET}")
+    print(separator)
+    for vm in data:
+        state = vm.get("State") or "unknown"
+        state_colour = Colour.GREEN if "running" in state else Colour.YELLOW
+        row_parts = []
+        for h in headers:
+            cell = (vm.get(h) or "").ljust(col_widths[h])
+            if h == "State":
+                cell = f"{state_colour}{cell}{Colour.RESET}"
+            row_parts.append(cell)
+        print("  ".join(row_parts))
+
+    pause()
+
+
+def start_vm() -> None:
+    print_header()
+    print(f"{bold('── Start a VM ──────────────────────────────')}\n")
+
+    rg = pick_resource_group()
+    if not rg:
+        pause()
+        return
+
+    vm = pick_vm(rg, prompt="Select the VM to START")
+    if not vm:
+        pause()
+        return
+
+    print()
+    info(f"Starting VM '{bold(vm)}' in '{rg}'…")
+
+    result = run_az("vm", "start", "--resource-group", rg, "--name", vm,
+                    "--output", "none", capture=True)
+    if result.returncode == 0:
+        success(f"VM '{vm}' started successfully.")
+    else:
+        error(f"Failed to start VM '{vm}'. Check the Azure portal for details.")
+        if result.stderr:
+            print(f"  {Colour.RED}{result.stderr.strip()}{Colour.RESET}")
+
+    pause()
+
+
+def deallocate_vm() -> None:
+    print_header()
+    print(f"{bold('── Deallocate a VM ─────────────────────────')}\n")
+
+    rg = pick_resource_group()
+    if not rg:
+        pause()
+        return
+
+    vm = pick_vm(rg, prompt="Select the VM to DEALLOCATE")
+    if not vm:
+        pause()
+        return
+
+    print()
+    warn("Deallocating a VM stops billing for compute resources.")
+    confirm = input(f"Are you sure you want to deallocate '{vm}'? [y/N] ").strip().lower()
+    if confirm != "y":
+        info("Operation cancelled.")
+        pause()
+        return
+
+    info(f"Deallocating VM '{bold(vm)}' in '{rg}'…")
+
+    result = run_az("vm", "deallocate", "--resource-group", rg, "--name", vm,
+                    "--output", "none", capture=True)
+    if result.returncode == 0:
+        success(f"VM '{vm}' deallocated successfully.")
+    else:
+        error(f"Failed to deallocate VM '{vm}'. Check the Azure portal for details.")
+        if result.stderr:
+            print(f"  {Colour.RED}{result.stderr.strip()}{Colour.RESET}")
+
+    pause()
+
+
+# ── Main menu ─────────────────────────────────────────────────────────────────
+MENU_ACTIONS = {
+    "1": ("List VMs in a resource group", list_vms),
+    "2": ("Start a VM",                   start_vm),
+    "3": ("Deallocate a VM",              deallocate_vm),
+}
+
+
+def main_menu() -> None:
+    while True:
+        print_header()
+        print(f"  {bold('What would you like to do?')}\n")
+        for key, (label, _) in MENU_ACTIONS.items():
+            print(f"  {yellow(key)}) {label}")
+        print(f"  {yellow('q')}) Quit\n")
+
+        opt = input("  Your choice: ").strip().lower()
+
+        if opt in MENU_ACTIONS:
+            MENU_ACTIONS[opt][1]()
+        elif opt == "q":
+            print(f"\n{Colour.CYAN}Goodbye! 👋{Colour.RESET}\n")
+            sys.exit(0)
+        else:
+            error(f"Invalid option '{opt}'. Please choose 1, 2, 3, or q.")
+            time.sleep(1)
+
+
+# ── Entry point ───────────────────────────────────────────────────────────────
+if __name__ == "__main__":
+    check_az_cli()
+    main_menu()
