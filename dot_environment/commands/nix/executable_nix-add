@@ -3,13 +3,13 @@ import pathlib
 import subprocess as sp
 import sys
 
-packages = [f"nixpkgs#{pkg}" for pkg in sys.argv[1:]]
+packages = [f"{pkg}" for pkg in sys.argv[1:]]
 
-cmd = f"NIXPKGS_ALLOW_UNFREE=1 nix profile add --impure {' '.join(packages)}"
+cmd = f"NIXPKGS_ALLOW_UNFREE=1 nix profile add --impure {' '.join([f'nixpkgs#{pkg}' for pkg in packages])}"
 result = sp.run(cmd, shell=True)
 
 if result.returncode == 0:
-    home_dot_nix_path = f"{pathlib.Path.home() / '.config' / 'home-manager' / 'home.nix'}"
+    home_dot_nix_path = f"{pathlib.Path.home() / '.local' / 'share' / 'chezmoi' / 'dot_config' / 'home-manager' / 'home.nix.tmpl'}"
     home_dot_nix = open(home_dot_nix_path, "r").read()
     new_home_dot_nix = home_dot_nix.replace('home.packages = with pkgs; [', 'home.packages = with pkgs; [\n' + '\n'.join(packages) + '\n')
     with open(home_dot_nix_path, "w") as ofile:
