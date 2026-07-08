@@ -14,4 +14,4 @@ if result.returncode == 0:
     with open(packages_list_path, "w") as ofile:
         ofile.write('n'.join(new_package_list))
     sp.run(f"cd ~/.local/share/chezmoi && git add dot_config/home-manager/packages.txt && git commit -m 'add packages {' '.join(packages)}' && git push origin main", shell=True)
-    sp.run("chezmoi apply ~/.config/home-manager/home.nix", shell=True)
+    sp.run("chezmoi apply ~/.config/home-manager/home.nix ~/.config/home-manager/packages.txt", shell=True)
