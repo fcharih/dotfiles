@@ -5,7 +5,7 @@
   home.stateVersion = "24.11";
 
   home.packages = with pkgs; [
-    lib.splitString "\n" (builtins.readFile .config/home-manager/packages.txt)
+    lib.splitString "\n" (builtins.readFile ./packages.txt)
   ];
 
   programs.home-manager.enable = true;
