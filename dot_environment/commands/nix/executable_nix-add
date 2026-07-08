@@ -14,4 +14,4 @@ if result.returncode == 0:
     new_home_dot_nix = home_dot_nix.replace('home.packages = with pkgs; [', 'home.packages = with pkgs; [\n' + '\n'.join(packages) + '\n')
     with open(home_dot_nix_path, "w") as ofile:
         ofile.write(new_home_dot_nix)
-    sp.run("chezmoi add {home_dot_nix_path}", shell=True)
+    sp.run(f"chezmoi add {home_dot_nix_path}", shell=True)
