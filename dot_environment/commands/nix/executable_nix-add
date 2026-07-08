@@ -12,6 +12,6 @@ if result.returncode == 0:
     packages_list_path = pathlib.Path.home() / '.local' / 'share' / 'chezmoi' / 'dot_config' / 'home-manager' / 'packages.txt'
     new_package_list = open(packages_list_path).read().splitlines() + packages
     with open(packages_list_path, "w") as ofile:
-        ofile.write('n'.join(new_package_list))
+        ofile.write('\n'.join(new_package_list))
     sp.run(f"cd ~/.local/share/chezmoi && git add dot_config/home-manager/packages.txt && git commit -m 'add packages {' '.join(packages)}' && git push origin main", shell=True)
     sp.run("chezmoi apply ~/.config/home-manager/home.nix ~/.config/home-manager/packages.txt", shell=True)
