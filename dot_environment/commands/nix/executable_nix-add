@@ -16,5 +16,5 @@ if result.returncode == 0:
         ofile.write('n'.join(new_package_list))
     old_home_nix = open(home_nix_path).read()
     open(home_nix_path, "w").write(old_home_nix.replace("$$$$", "\n".join([f'\t\t{pkg}' for pkg in new_package_list])))
-    sp.run(f"cd ~/.local/share/chezmoi && git add dot_config/home-manager/packages.txt dot_config/home-manager/home.nix && git commit -m 'add packages {' '.join(packages)}' && git push origin main", shell=True)
+    sp.run(f"cd ~/.local/share/chezmoi && git add dot_config/home-manager/packages.txt dot_config/home-manager/home.nix.tmpl && git commit -m 'add packages {' '.join(packages)}' && git push origin main", shell=True)
     sp.run("chezmoi apply ~/.config/home-manager/home.nix", shell=True)
