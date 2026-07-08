@@ -33,7 +33,10 @@ export TERM=xterm-256color
 export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$HOME/.cargo/bin
 export PATH=$PATH:$HOME/.environment/commands
-export PATH=$PATH:$HOME/.environment/commands/nuvobio
+for dir in $HOME/.environment/commands; do
+  PATH="$PATH:$dir"
+done
+export PATH
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
   export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock

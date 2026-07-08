@@ -1,8 +1,17 @@
 #! /usr/bin/env python3
+import pathlib
 import subprocess as sp
 import sys
 
 packages = [f"nixpkgs#{pkg}" for pkg in sys.argv[1:]]
 
 cmd = f"NIXPKGS_ALLOW_UNFREE=1 nix profile add --impure {' '.join(packages)}"
-sp.run(cmd, shell=True)
+result = sp.run(cmd, shell=True)
+
+if result.returncode == 0:
+    home_dot_nix_path = f"{pathlib.Path.home() / '.config' / 'home-manager' / 'home.nix'}"
+    home_dot_nix = open(home_dot_nix_path, "r").read()
+    new_home_dot_nix = home_dot_nix.replace('home.packages = with pkgs; [', 'home.packages = with pkgs; [\n' + '\n'.join(packages) + '\n')
+    with open(home_dot_nix_path, "w") as ofile:
+        ofile.write(new_home_dot_nix)
+    sp.run("chezmoi add {home_dot_nix_path}", shell=True)
