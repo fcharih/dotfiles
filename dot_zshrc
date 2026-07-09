@@ -34,10 +34,10 @@ export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$HOME/.cargo/bin
 export PATH=$PATH:$HOME/.environment/commands
 for dir in $HOME/.environment/commands; do
-  PATH="$PATH:$dir"
+  PATH="$dir:$PATH"
 done
 export PATH
-export PATH=$PATH:$HOME/.environment/python/.venv/bin
+export PATH=$HOME/.environment/python/.venv/bin:$PATH
 
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
