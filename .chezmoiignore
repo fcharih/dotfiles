@@ -1,3 +1,4 @@
 *._*
 .git
 .config/chezmoi
+.environment/python/.venv

@@ -1,0 +1,19 @@
+[project]
+name = "python"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "matplotlib",
+  "scipy",
+  "numpy",
+  "pandas",
+  "scikit-learn",
+  "biopython",
+  "psycopg2-binary",
+  "sqlalchemy",
+  "tqdm",
+  "python-dotenv",
+  "ipykernel"
+]
