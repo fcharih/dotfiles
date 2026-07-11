@@ -20,3 +20,4 @@ podman-compose
 buildah
 skopeo
 claude-code
+signal-cli
