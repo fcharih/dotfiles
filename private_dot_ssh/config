@@ -63,23 +63,7 @@ Host DevSmall
   User fcharih
 
 Host DevLarge
-  HostName 135.232.122.187
-  User fcharih
-
-Host Worker1
-  HostName 20.55.247.199
-  User fcharih
-
-Host Worker2
-  HostName 172.175.80.118
-  User fcharih
-
-Host Worker3
-  HostName 20.109.59.104
-  User fcharih
-
-Host NBGPU
-  HostName 20.118.26.170
+  HostName 128.24.113.255
   User fcharih
 
 Host NBServer
