@@ -35,16 +35,8 @@ $env.EDITOR = "nvim"
  
 # ---------- Aliases ----------
 alias vim = nvim
-alias ls = eza
 alias rsync = rsync --progress -v
 alias nix-update = nix run home-manager/master -- switch --flake ~/.config/home-manager -b backup
- 
-# `activate` sourced a bash-specific venv/bin/activate script - nu can't run
-# that. If your venvs are created with a recent `virtualenv` (which can emit
-# a nu activator), use this instead:
-def --env activate [] {
-    overlay use .venv/bin/activate.nu
-}
  
 # `oplogin` relied on `eval "$(op signin)"` to pick up exported vars.
 # Nushell has no generic eval-into-environment, so parse the export lines:
@@ -57,8 +49,8 @@ def --env oplogin [] {
     }
 }
  
-# `azlogin` / `azcopylogin` as functions, so $env.AZURE_* is read at call
-# time rather than baked in once at shell startup like the zsh aliases were.
+## `azlogin` / `azcopylogin` as functions, so $env.AZURE_* is read at call
+## time rather than baked in once at shell startup like the zsh aliases were.
 def azlogin [] {
     az login --service-principal -u $env.AZURE_CLIENT_ID -p $env.AZURE_CLIENT_SECRET --tenant $env.AZURE_TENANT_ID
 }
@@ -68,9 +60,9 @@ def azcopylogin [] {
         azcopy login --service-principal --application-id $env.AZURE_CLIENT_ID --tenant-id $env.AZURE_TENANT_ID
     }
 }
- 
-# ---------- ssh-agent ----------
-# `eval "$(ssh-agent -s)"` - parse ssh-agent's export lines into $env.
+#
+## ---------- ssh-agent ----------
+## `eval "$(ssh-agent -s)"` - parse ssh-agent's export lines into $env.
 def --env start-ssh-agent [] {
     for line in (^ssh-agent -s | lines) {
         if ($line | str starts-with "SSH_AUTH_SOCK=") or ($line | str starts-with "SSH_AGENT_PID=") {
@@ -81,7 +73,7 @@ def --env start-ssh-agent [] {
 }
 start-ssh-agent
  
-# Add private keys found under ~/.ssh containing "PRIVATE"
+## Add private keys found under ~/.ssh containing "PRIVATE"
 ^grep -slR "PRIVATE" ~/.ssh/ | ^xargs ssh-add -q
 
 const NU_PLUGIN_DIRS = [
@@ -89,10 +81,10 @@ const NU_PLUGIN_DIRS = [
   ...$NU_PLUGIN_DIRS
 ]
 
-# NUSHELL SCRIPTS
+## NUSHELL SCRIPTS
 source $"($nu.home-path)/.config/nushell/ssh-completion.nu"
-
-# Use mise for python, rust, node, etc.
+#
+## Use mise for python, rust, node, etc.
 use "/Users/fcharih/Library/Application Support/nushell/scripts/mise.nu"
 
 
