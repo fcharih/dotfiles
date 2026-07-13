@@ -1,22 +1,15 @@
-# config.nu
+# ~/.config/nushell/config.nu
+# Nushell equivalent of the aliases / init-hooks portion of your zshrc.
+ 
+# ---------- One-time setup (run once in a terminal, not on every startup) ----------
+# Starship and mise generate nu-native init scripts and drop them in nushell's
+# autoload folder, so - unlike zsh - you don't need to `eval` or `source`
+# them on every launch. Run these once (and again after upgrading either tool):
 #
-# Installed by:
-# version = "0.105.1"
+#   mkdir ($nu.data-dir | path join "vendor/autoload")
+#   starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
+#   mise activate nu | save -f ($nu.data-dir | path join "vendor/autoload/mise.nu")
 #
-# This file is used to override default Nushell settings, define
-# (or import) custom commands, or run any other startup tasks.
-# See https://www.nushell.sh/book/configuration.html
-#
-# This file is loaded after env.nu and before login.nu
-#
-# You can open this file in your default editor using:
-# config nu
-#
-# See `help config nu` for more options
-#
-# You can remove these comments if you want or leave
-# them for future reference.
-
 print " /\\_/\\   DO IT FOR  /\\_/\\"
 print "( o.o )  ROSIE AND ( o.o )"
 print " > ^ <   TESSIE.    > ^ <"
@@ -29,42 +22,77 @@ let $current_os = if ("Linux" in (sys host).long_os_version) { "Linux" } else { 
 use std/util "path add"
 
 path add $"($nu.home-path)/.local/bin"
+path add $"($nu.home-path)/.cargo/bin"
 path add "/usr/local/go/bin"
 path add $"($nu.home-path)/.environment/commands"
 path add $"($nu.home-path)/.environment/commands/nuvobio"
-path add $"($nu.home-path)/.pyenv/shims"
 path add $"($nu.home-path)/.config/emacs/bin"
-
-let $brew_path = if ($current_os == "macOS" ) { "/opt/homebrew/bin" } else { "/home/linuxbrew/.linuxbrew/bin" }
-path add $brew_path
-
-path add $"($nu.home-path)/.cargo/bin"
 
 mkdir ($nu.data-dir | path join "vendor/autoload")
 ~/.cargo/bin/starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
 
-$env.EDITOR = "lvim"
-
-
-$env.PYENV_ROOT = "~/.pyenv" | path expand
-if (( $"($env.PYENV_ROOT)/bin" | path type ) == "dir") {
-  $env.PATH = $env.PATH | prepend $"($env.PYENV_ROOT)/bin" }
-$env.PATH = $env.PATH | prepend $"(pyenv root)/shims"
-
-$env.PYTHONPATH = $"($nu.home-path)/.environment/python"
-
-# ALIASES
-alias n = lvim
-alias z = zellij
-alias nopen = open
-alias open = ^open
-alias cutunnel = ssh -D 8888 -C -N dna-28
-
-# NUSHELL SCRIPTS
-source $"($nu.home-path)/.config/nushell/ssh-completion.nu"
-
+$env.EDITOR = "nvim"
+ 
+# ---------- Aliases ----------
+alias vim = nvim
+alias ls = eza
+alias rsync = rsync --progress -v
+alias nix-update = nix run home-manager/master -- switch --flake ~/.config/home-manager -b backup
+ 
+# `activate` sourced a bash-specific venv/bin/activate script - nu can't run
+# that. If your venvs are created with a recent `virtualenv` (which can emit
+# a nu activator), use this instead:
+def --env activate [] {
+    overlay use .venv/bin/activate.nu
+}
+ 
+# `oplogin` relied on `eval "$(op signin)"` to pick up exported vars.
+# Nushell has no generic eval-into-environment, so parse the export lines:
+def --env oplogin [] {
+    for line in (^op signin | lines) {
+        if ($line | str starts-with "export ") {
+            let kv = ($line | str replace "export " "" | split row "=")
+            load-env {($kv.0): ($kv.1 | str trim -c '"')}
+        }
+    }
+}
+ 
+# `azlogin` / `azcopylogin` as functions, so $env.AZURE_* is read at call
+# time rather than baked in once at shell startup like the zsh aliases were.
+def azlogin [] {
+    az login --service-principal -u $env.AZURE_CLIENT_ID -p $env.AZURE_CLIENT_SECRET --tenant $env.AZURE_TENANT_ID
+}
+ 
+def azcopylogin [] {
+    with-env {AZCOPY_SPA_CLIENT_SECRET: $env.AZURE_CLIENT_SECRET} {
+        azcopy login --service-principal --application-id $env.AZURE_CLIENT_ID --tenant-id $env.AZURE_TENANT_ID
+    }
+}
+ 
+# ---------- ssh-agent ----------
+# `eval "$(ssh-agent -s)"` - parse ssh-agent's export lines into $env.
+def --env start-ssh-agent [] {
+    for line in (^ssh-agent -s | lines) {
+        if ($line | str starts-with "SSH_AUTH_SOCK=") or ($line | str starts-with "SSH_AGENT_PID=") {
+            let kv = ($line | split row ";" | first | split row "=")
+            load-env {($kv.0): ($kv.1)}
+        }
+    }
+}
+start-ssh-agent
+ 
+# Add private keys found under ~/.ssh containing "PRIVATE"
+^grep -slR "PRIVATE" ~/.ssh/ | ^xargs ssh-add -q
 
 const NU_PLUGIN_DIRS = [
   ($nu.current-exe | path dirname)
   ...$NU_PLUGIN_DIRS
 ]
+
+# NUSHELL SCRIPTS
+source $"($nu.home-path)/.config/nushell/ssh-completion.nu"
+
+# Use mise for python, rust, node, etc.
+use "/Users/fcharih/Library/Application Support/nushell/scripts/mise.nu"
+
+
