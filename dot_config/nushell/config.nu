@@ -21,12 +21,14 @@ let $current_os = if ("Linux" in (sys host).long_os_version) { "Linux" } else { 
 
 use std/util "path add"
 
-path add $"($nu.home-path)/.local/bin"
-path add $"($nu.home-path)/.cargo/bin"
+path add $"($env.HOME)/.local/share/mise/shims"
+path add $"($nu.home-dir)/.nix-profile/bin"
+path add $"($nu.home-dir)/.local/bin"
+path add $"($nu.home-dir)/.cargo/bin"
 path add "/usr/local/go/bin"
-path add $"($nu.home-path)/.environment/commands"
-path add $"($nu.home-path)/.environment/commands/nuvobio"
-path add $"($nu.home-path)/.config/emacs/bin"
+path add $"($nu.home-dir)/.environment/commands"
+path add $"($nu.home-dir)/.environment/commands/nuvobio"
+path add $"($nu.home-dir)/.config/emacs/bin"
 
 mkdir ($nu.data-dir | path join "vendor/autoload")
 ~/.cargo/bin/starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
@@ -82,9 +84,6 @@ const NU_PLUGIN_DIRS = [
 ]
 
 ## NUSHELL SCRIPTS
-source $"($nu.home-path)/.config/nushell/ssh-completion.nu"
-#
+source $"($nu.home-dir)/.config/nushell/ssh-completion.nu"
+
 ## Use mise for python, rust, node, etc.
-use "/Users/fcharih/Library/Application Support/nushell/scripts/mise.nu"
-
-
