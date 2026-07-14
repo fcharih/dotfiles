@@ -55,3 +55,6 @@
 
 (package! smudge
   :recipe (:host github :repo "danielfm/smudge"))
+
+(package! kitty-graphics
+  :recipe (:host github :repo "cashmeredev/kitty-graphics.el"))

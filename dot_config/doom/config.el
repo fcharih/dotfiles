@@ -99,3 +99,9 @@
 (setq smudge-transport 'connect)
 (setq smudge-oauth2-client-secret "340113d0bd6845f197bdde3eaff24c04")
 (setq smudge-oauth2-client-id "10a4b79cd5e14939aca301c43763024d")
+
+
+(use-package! kitty-graphics
+  :config
+  (setq kitty-gfx-enable-video t)
+  (kitty-graphics-setup))
