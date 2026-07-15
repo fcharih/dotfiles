@@ -9,19 +9,19 @@
     environment = "{{ env "ENVIRONMENT" }}"
 
 [hooks.read-source-state.pre]
-script = "hooks/pre-source-read.sh"
+script = "{{ .chezmoi.sourceDir }}/hooks/pre-source-read.sh"
 
 [hooks.read-source-state.post]
-script = "hooks/post-source-read.sh"
+script = "{{ .chezmoi.sourceDir }}/hooks/post-source-read.sh"
 
 [hooks.apply.pre]
-script = "hooks/pre-apply.sh"
+script = "{{ .chezmoi.sourceDir }}/hooks/pre-apply.sh"
 
 [hooks.apply.post]
-script = "hooks/post-apply.sh"
+script = "{{ .chezmoi.sourceDir }}/hooks/post-apply.sh"
 
 [hooks.add.pre]
-script = "hooks/pre-add.sh"
+script = "{{ .chezmoi.sourceDir }}/hooks/pre-add.sh"
 
 [hooks.add.post]
-script = "hooks/post-add.sh"
+script = "{{ .chezmoi.sourceDir }}/hooks/post-add.sh"
