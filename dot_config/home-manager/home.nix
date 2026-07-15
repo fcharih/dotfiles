@@ -47,6 +47,8 @@ in
     emacsPackages.doom
     postgresql_18
     openssl
+    cloudflared
+    luarocks
     unzip
   ];
   programs.home-manager.enable = true;
