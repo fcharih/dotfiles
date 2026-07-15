@@ -7,3 +7,27 @@
 
 [data]
     environment = "{{ env "ENVIRONMENT" }}"
+
+[hooks.read-source-state.pre]
+command = "bash"
+args = ["$HOME/.local/share/chezmoi/hooks/pre-source-read.sh"]
+
+[hooks.read-source-state.post]
+command = "bash"
+args = ["$HOME/.local/share/chezmoi/hooks/post-source-read.sh"]
+
+[hooks.apply.pre]
+command = "bash"
+args = ["$HOME/.local/share/chezmoi/hooks/pre-apply.sh"]
+
+[hooks.apply.post]
+command = "bash"
+args = ["$HOME/.local/share/chezmoi/hooks/post-apply.sh"]
+
+[hooks.add.pre]
+command = "bash"
+args = ["$HOME/.local/share/chezmoi/hooks/pre-add.sh"]
+
+[hooks.add.post]
+command = "bash"
+args = ["$HOME/.local/share/chezmoi/hooks/post-add.sh"]
