@@ -46,7 +46,7 @@ in
     emacs30
     emacsPackages.doom
     postgresql_18
-    openssl-dev
+    openssl
     unzip
   ];
   programs.home-manager.enable = true;
