@@ -50,6 +50,7 @@ in
     cloudflared
     luarocks
     unzip
+    rtorrent
   ];
   programs.home-manager.enable = true;
 
