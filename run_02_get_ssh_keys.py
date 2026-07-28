@@ -6,7 +6,6 @@ import json
 
 session_token = sp.run("op signin --raw", shell=True, capture_output=True, text=True).stdout
 result = sp.run(f"op item list --format=json --tags ssh --session {session_token} | op item get - --fields 'private key,public key' --reveal --format=json --session {session_token}", shell=True, text=True, capture_output=True)
-print(result.stderr)
 
 keysets = re.findall(r"\[([^\]]+)\]", result.stdout)
 
