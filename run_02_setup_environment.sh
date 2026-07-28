@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-eval "$(op signin)"
-
 # Retrieve all vaults containing "SSH" (case-insensitive)
 vaults_json="$(op vault list --format=json)"
 
