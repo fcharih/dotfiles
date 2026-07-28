@@ -9,7 +9,7 @@
 
   outputs = { nixpkgs, home-manager, ... }:
   let
-    system = "aarch64-darwin";
+    if pkgs.stdenv.isDarwin then system = "x86_64-linux" else system = "aarch64-darwin";
     pkgs = import nixpkgs {
       inherit system;
       config.allowUnfree = true;
