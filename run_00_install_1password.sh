@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-if command -v op &>/dev/null; then
+if command -v op --version &>/dev/null; then
   echo "1Password CLI already installed. Skipping."
   exit 0
 fi
