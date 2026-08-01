@@ -2,6 +2,7 @@
 let
   azure-cli-with-extensions = pkgs.azure-cli.withExtensions [
     pkgs.azure-cli-extensions.azure-devops
+    pkgs.azure-cli-extensions.ssh
   ];
 in
 {
@@ -23,6 +24,8 @@ in
     azure-storage-azcopy
     starship
     oh-my-zsh
+    _1password-cli
+    chezmoi
     gh
     mise
     podman
@@ -48,24 +51,12 @@ in
     cloudflared
     luarocks
     unzip
-    rtorrent
-    gvproxy
-    netavark
-    aardvark-dns
-    slirp4netns
-    fuse-overlayfs
-    crun
+    ffmpeg
+    glibtool
   ];
   programs.home-manager.enable = true;
+
   home.sessionVariables = {
     PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
   };
-
-  xdg.configFile."containers/containers.conf".text = ''
-    [engine]
-    helper_binaries_dir = ["${pkgs.gvproxy}/bin"]
-
-    [network]
-    network_backend = "netavark"
-  '';
 }
