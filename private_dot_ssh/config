@@ -1,6 +1,13 @@
+Host *
+  PreferredAuthentications publickey
+
 #############################################
 # Personal
 #############################################
+Host server.nuvobio.com
+  HostName server.nuvobio.com
+  User nuvobioadmin
+
 Host macmini
   ProxyCommand cloudflared access ssh --hostname myserver.charih.ca
   IdentityFile ~/.ssh/id_ed25519
@@ -84,7 +91,7 @@ Host graham
   HostName graham.computecanada.ca
   User fcharih
 
-Host gra* 
+Host gra*
   ProxyJump graham
 
 Host rorqual
@@ -129,6 +136,3 @@ Host cubiccloud
 Host cancercomputer
   User fcharih
   HostName 130.15.59.24
-
-
-
