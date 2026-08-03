@@ -18,7 +18,7 @@ for keyset in keysets:
         key_name = key['reference'].split("/")[-2]
 
         if 'private' in key['reference']:
-            filename = f"{pathlib.Path.home()}/.ssh/{key_name}_pvt"
+            filename = f"{pathlib.Path.home()}/.ssh/{key_name}"
             with open(filename, 'w') as private_key_file:
                 private_key_file.write(key['value'])
             os.chmod(filename, 0o600)
