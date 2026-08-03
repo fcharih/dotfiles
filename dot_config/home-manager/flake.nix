@@ -6,9 +6,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
+
   outputs = { nixpkgs, home-manager, ... }:
   let
-    system = {{ if eq .chezmoi.os "darwin" }}"aarch64-darwin"{{ else }}"x86_64-linux"{{ end }};
+    system = "aarch64-darwin";
     pkgs = import nixpkgs {
       inherit system;
       config.allowUnfree = true;
