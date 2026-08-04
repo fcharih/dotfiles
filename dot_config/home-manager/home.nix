@@ -19,11 +19,15 @@ in
     "${config.home.homeDirectory}/.local/bin"
     "${config.home.homeDirectory}/.cargo/bin"
     "${config.home.homeDirectory}/.environment/commands"
+    "${config.home.homeDirectory}/.config/emacs/bin"
   ];
   programs.zsh = {
     enable = true;
     enableCompletion = true;
     shellAliases = {
+      emacs = "emacs -nw";
+      emacsdaemon = "emacs --daemon";
+      emacsa = "emacs -c -nw";
       vim = "nvim";
       ls = "eza";
       rsync = "rsync --progress -v"; # always use verbose mode
