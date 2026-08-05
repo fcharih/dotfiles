@@ -25,6 +25,7 @@ in
     enable = true;
     enableCompletion = true;
     shellAliases = {
+      nix-pkg = "vim ~/.config/home-manager/packages.nix && nix-update";
       emacs = "emacs -nw";
       emacsdaemon = "emacs --daemon";
       emacsa = "emacs -c -nw";

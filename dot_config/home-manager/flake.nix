@@ -5,9 +5,13 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    homebrew = {
+      url = "github:koalalorenzo/home-manager-brew";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { nixpkgs, home-manager, ... }:
+  outputs = { nixpkgs, home-manager, homebrew, ... }:
   let
     system = "aarch64-darwin";
     pkgs = import nixpkgs {
@@ -17,7 +21,10 @@
   in {
     homeConfigurations.fcharih = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
-      modules = [ ./home.nix ];
+      modules = [ 
+        ./home.nix 
+        homebrew.homeManagerModules.default
+      ];
     };
   };
 }
