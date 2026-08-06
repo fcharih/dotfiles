@@ -1,3 +1,3 @@
 #! /bin/bash
 
-nix run home-manager/master -- switch
+/nix/var/nix/profiles/default/bin/nix run home-manager/master -- switch
