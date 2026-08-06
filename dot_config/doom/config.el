@@ -105,3 +105,25 @@
   :config
   (setq kitty-gfx-enable-video t)
   (kitty-graphics-setup))
+
+(use-package! claude-code-ide
+  :config
+  (claude-code-ide-emacs-tools-setup))
+
+(use-package! pgmacs
+  :commands (pgmacs pgmacs-open-string pgmacs-open-uri))
+
+(use-package! code-cells
+  :hook ((python-mode . code-cells-mode-maybe)) ; auto-enable if cell markers found
+  :config
+  ;; optional: more ergonomic bindings, per the README
+  (map! :map code-cells-mode-map
+        "M-n"     #'code-cells-forward-cell
+        "M-p"     #'code-cells-backward-cell
+        "C-c C-c" #'code-cells-eval))
+
+(use-package! exec-path-from-shell
+  :ensure t
+  :config
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize)))

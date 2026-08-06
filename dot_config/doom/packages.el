@@ -58,3 +58,13 @@
 
 (package! kitty-graphics
   :recipe (:host github :repo "cashmeredev/kitty-graphics.el"))
+
+(package! claude-code-ide
+  :recipe (:host github :repo "manzaltu/claude-code-ide.el"))
+
+
+(package! pg :recipe (:host github :repo "emarsden/pg-el"))
+(package! pgmacs :recipe (:host github :repo "emarsden/pgmacs"))
+
+(package! code-cells)
+(package! exec-path-from-shell)
