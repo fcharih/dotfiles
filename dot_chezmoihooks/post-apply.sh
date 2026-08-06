@@ -1,3 +1,4 @@
 #! /bin/bash
-/nix/var/nix/profiles/default/bin/nix profile install nixpkgs#hello
-/nix/var/nix/profiles/default/bin/nix run home-manager/master -- switch
+nix profile install nixpkgs#hello
+nix run home-manager/master -- switch
+python3 ~/.local/share/chezmoi/.scripts/02_get_ssh_keys.py

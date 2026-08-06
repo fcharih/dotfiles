@@ -5,10 +5,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    homebrew = {
-      url = "github:koalalorenzo/home-manager-brew";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = { nixpkgs, home-manager, homebrew, ... }:
@@ -23,7 +19,6 @@
       inherit pkgs;
       modules = [ 
         ./home.nix 
-        homebrew.homeManagerModules.default
       ];
     };
   };

@@ -51,7 +51,7 @@ in
     };
     oh-my-zsh = {
       enable = true;
-      plugins = [ "git" "docker" "sudo" ];
+      plugins = [ "git" "sudo" ];
       theme = "robbyrussell";
     };
     initExtra = ''
