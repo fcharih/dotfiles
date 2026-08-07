@@ -63,4 +63,29 @@ in
       . $HOME/.tokens
     '';
   };
+
+  systemd.user.sockets.podman = {
+    Unit.Description = "Podman API Socket";
+    Socket = {
+      ListenStream = "%t/podman/podman.sock";
+      SocketMode = "0660";
+    };
+    Install.WantedBy = [ "sockets.target" ];
+  };
+
+  systemd.user.services.podman = {
+    Unit = {
+      Description = "Podman API Service";
+      Requires = [ "podman.socket" ];
+      After = [ "podman.socket" ];
+    };
+    Service = {
+      Type = "exec";
+      KillMode = "process";
+      ExecStart = "${pkgs.podman}/bin/podman system service";
+    };
+  };
+
+  # so docker-compat tools (docker-compose, testcontainers, etc.) find it
+  home.sessionVariables.DOCKER_HOST = "unix://$XDG_RUNTIME_DIR/podman/podman.sock";
 }
