@@ -49,22 +49,33 @@
 ;; (unpin! t)
 (package! websocket)
 
-(package! typst-ts-mode :recipe (:host nil :repo "https://git.sr.ht/~meow_king/typst-ts-mode"))
+(package! typst-ts-mode
+  :recipe (:host nil :repo "https://git.sr.ht/~meow_king/typst-ts-mode")
+  :pin "1367003e2ad55a2f6f9e43178584683028ab56e9")            ; see note below
 
-(package! typst-preview :recipe (:host github :repo "havarddj/typst-preview.el"))
+(package! typst-preview
+  :recipe (:host github :repo "havarddj/typst-preview.el")
+  :pin "f2903a1b98e13be7c927de835ae0d9159dd9fb9a")
 
 (package! smudge
-  :recipe (:host github :repo "danielfm/smudge"))
+  :recipe (:host github :repo "danielfm/smudge")
+  :pin "c90db830e84e34ac5724f57eda2f1112a589df5c")
 
 (package! kitty-graphics
-  :recipe (:host github :repo "cashmeredev/kitty-graphics.el"))
+  :recipe (:host github :repo "cashmeredev/kitty-graphics.el")
+  :pin "13666d4eb2ef4eeed24697c0326368eff3667dce")
 
 (package! claude-code-ide
-  :recipe (:host github :repo "manzaltu/claude-code-ide.el"))
+  :recipe (:host github :repo "manzaltu/claude-code-ide.el")
+  :pin "32a8a904ac21e52c54231b99796d12ae36df9c22")
 
+(package! pg
+  :recipe (:host github :repo "emarsden/pg-el")
+  :pin "ced3f1e4fa9bb8d3d33150f43d0dc357e4917636")
 
-(package! pg :recipe (:host github :repo "emarsden/pg-el"))
-(package! pgmacs :recipe (:host github :repo "emarsden/pgmacs"))
+(package! pgmacs
+  :recipe (:host github :repo "emarsden/pgmacs")
+  :pin "72c98973e750c9a2a39780a4f43d3c9aaad8e06e")
 
 (package! code-cells)
 (package! exec-path-from-shell)

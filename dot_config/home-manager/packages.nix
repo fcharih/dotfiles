@@ -30,8 +30,6 @@ libsixel
 android-tools
 zellij
 timg
-emacs30
-emacsPackages.doom
 postgresql_18
 openssl
 cloudflared
