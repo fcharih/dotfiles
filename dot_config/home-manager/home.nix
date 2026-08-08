@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ inputs, pkgs, config, ... }:
 let
   azure-cli-with-extensions = pkgs.azure-cli.withExtensions [
     pkgs.azure-cli-extensions.azure-devops
@@ -88,4 +88,9 @@ in
 
   # so docker-compat tools (docker-compose, testcontainers, etc.) find it
   home.sessionVariables.DOCKER_HOST = "unix://$XDG_RUNTIME_DIR/podman/podman.sock";
+
+  programs.doom-emacs = {
+    enable = true;
+    doomDir = ./doom.d;
+  };
 }

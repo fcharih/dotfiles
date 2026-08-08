@@ -5,9 +5,12 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-doom-emacs-unstraightened = {
+      url = "github:marienz/nix-doom-emacs-unstraightened";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
-
-  outputs = { nixpkgs, home-manager, ... }:
+  outputs = { self, nixpkgs, home-manager, ... }@inputs:
   let
     system = "aarch64-darwin";
     pkgs = import nixpkgs {
@@ -17,9 +20,11 @@
   in {
     homeConfigurations.fcharih = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
-      modules = [ 
-        ./home.nix 
+      modules = [
+        inputs.nix-doom-emacs-unstraightened.homeModule
+        ./home.nix
       ];
+      extraSpecialArgs = { inherit inputs; };
     };
   };
 }
