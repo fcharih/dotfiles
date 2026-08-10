@@ -12,19 +12,21 @@
   };
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
   let
-    system = "aarch64-darwin";
-    pkgs = import nixpkgs {
-      inherit system;
-      config.allowUnfree = true;
-    };
-  in {
-    homeConfigurations.fcharih = home-manager.lib.homeManagerConfiguration {
-      inherit pkgs;
+    mkHome = system: home-manager.lib.homeManagerConfiguration {
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
       modules = [
         inputs.nix-doom-emacs-unstraightened.homeModule
         ./home.nix
       ];
       extraSpecialArgs = { inherit inputs; };
+    };
+  in {
+    homeConfigurations = {
+      fcharih            = mkHome "aarch64-darwin"; # default: your Mac
+      "fcharih@linuxbox" = mkHome "x86_64-linux";    # rename to match `hostname` on that machine
     };
   };
 }

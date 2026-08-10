@@ -54,7 +54,7 @@ in
       plugins = [ "git" "sudo" ];
       theme = "robbyrussell";
     };
-    initExtra = ''
+    initContent = ''
       eval "$(ssh-agent -s)"
       eval "$(starship init zsh)"
       eval "$(mise activate zsh)"
