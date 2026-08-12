@@ -1,0 +1,5 @@
+tap "hashicorp/tap"
+brew "hashicorp/tap/terraform"
+brew "rclone"
+tap "fcoury/tap"
+brew "tsql"
