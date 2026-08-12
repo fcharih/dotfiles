@@ -3,16 +3,19 @@
     "doomdir": {
       "flake": false,
       "locked": {
-        "path": "./doom.d",
-        "type": "path"
+        "lastModified": 1783603851,
+        "narHash": "sha256-PXn0v4NR75U7/FpkaZ9GD6HPepVY5vVT48tMd1tMgdQ=",
+        "owner": "marienz",
+        "repo": "nix-doom-emacs-unstraightened",
+        "rev": "4c63e8a411f815bd2473e5ced94dc4b8bf31d240",
+        "type": "github"
       },
       "original": {
-        "path": "./doom.d",
-        "type": "path"
-      },
-      "parent": [
-        "nix-doom-emacs-unstraightened"
-      ]
+        "owner": "marienz",
+        "ref": "doomdir",
+        "repo": "nix-doom-emacs-unstraightened",
+        "type": "github"
+      }
     },
     "doomemacs": {
       "flake": false,
@@ -56,11 +59,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1786155379,
-        "narHash": "sha256-OBSHHty593sulxrPmdEO4I1ntTVBVpmIJ0UCL1vTjyM=",
+        "lastModified": 1786438383,
+        "narHash": "sha256-KpcHLOOrgGNZGsM/IHbvAzo82RLT0pvG67nTcXgYLKs=",
         "owner": "nix-community",
         "repo": "emacs-overlay",
-        "rev": "6d127662b8b91dfe39db34169fc5a1752f99b918",
+        "rev": "f0abc0e49d0e038cf603eaa6dcbd918c32193f1a",
         "type": "github"
       },
       "original": {
@@ -76,11 +79,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1780408569,
-        "narHash": "sha256-s7Tv6FUQThRAvW8En8XVC6HMb0uiikzVccCcCo9u/Bg=",
+        "lastModified": 1786356609,
+        "narHash": "sha256-ou8fYz5w9yhXC8YbvvExybFIa19MyW5G/8dEPqa90hM=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "f384af1bec6423a0d4ba1855917ab948f64e5808",
+        "rev": "c30c7955cec30d664a9baced6bc0112e263d4647",
         "type": "github"
       },
       "original": {
@@ -95,17 +98,15 @@
         "doomemacs": "doomemacs",
         "doomemacs-modules": "doomemacs-modules",
         "emacs-overlay": "emacs-overlay",
-        "nixpkgs": [
-          "nixpkgs"
-        ],
+        "nixpkgs": "nixpkgs",
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1786179843,
-        "narHash": "sha256-Q5ztjTKUhUuwYn7Mp+ASz8lt2pGuchYc62Hx8Emn3cg=",
+        "lastModified": 1786439814,
+        "narHash": "sha256-c94MlpDXoIECgN/cPqK1lY8XNtOhp6wyGrdmeoatT/I=",
         "owner": "marienz",
         "repo": "nix-doom-emacs-unstraightened",
-        "rev": "6978b5cd7acc8f24f78ef521c9a63795c38e30ea",
+        "rev": "a38ecb1a413426620c553d1fb105c9beeb5f4f98",
         "type": "github"
       },
       "original": {
@@ -116,11 +117,24 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1780243769,
-        "narHash": "sha256-x5UQuRsH3MqI0U9afaXSNqzTPSeZlRLvFAav2Ux1pNw=",
+        "lastModified": 1786348146,
+        "narHash": "sha256-QqTLx1vezpyalH9RD66nuAenX9hbnH+gD73R7lJxnWA=",
+        "rev": "d482ef84049d9b7276b83a06e4e4d76983830097",
+        "type": "tarball",
+        "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.11pre1051111.d482ef84049d/nixexprs.tar.xz"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "type": "indirect"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1786106723,
+        "narHash": "sha256-zDSUbpoeo/9ZmD2+wXnzxoo1+uhL8vxc0b8yuYMKYq0=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "331800de5053fcebacf6813adb5db9c9dca22a0c",
+        "rev": "f13ff45afd1bb73e640eaa08a7066dbed07e3238",
         "type": "github"
       },
       "original": {
@@ -134,7 +148,7 @@
       "inputs": {
         "home-manager": "home-manager",
         "nix-doom-emacs-unstraightened": "nix-doom-emacs-unstraightened",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs_2"
       }
     },
     "systems": {

@@ -33,7 +33,7 @@ in
       ls = "eza";
       rsync = "rsync --progress -v"; # always use verbose mode
       activate = "source .venv/bin/activate";
-      nix-update = "nix run home-manager/master -- switch --flake ~/.config/home-manager -b backup";
+      nix-update = "nix run home-manager/master -- switch --flake ~/.config/home-manager -b backup --impure";
       oplogin = "eval \"$(op signin)\"";
       azlogin = "az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET --tenant $AZURE_TENANT_ID";
       azcopylogin = "AZCOPY_SPA_CLIENT_SECRET=$AZURE_CLIENT_SECRET azcopy login --service-principal --application-id $AZURE_CLIENT_ID --tenant-id $AZURE_TENANT_ID";
@@ -85,12 +85,15 @@ in
       ExecStart = "${pkgs.podman}/bin/podman system service";
     };
   };
+  imports = [ inputs.nix-doom-emacs-unstraightened.homeModule ];
+
 
   # so docker-compat tools (docker-compose, testcontainers, etc.) find it
   home.sessionVariables.DOCKER_HOST = "unix://$XDG_RUNTIME_DIR/podman/podman.sock";
 
   programs.doom-emacs = {
     enable = true;
-    doomDir = ./doom.d;
+    doomDir = ./doom.d;          # your self-managed Doom config
+    doomLocalDir = "${config.home.homeDirectory}/.local/share/nix-doom";
   };
 }
