@@ -1,3 +1,6 @@
+Host 20.62.45.209
+  HostName 20.62.45.209
+
 Host *
   PreferredAuthentications publickey
 
@@ -76,6 +79,17 @@ Host DevLarge
 Host NBServer
   HostName 20.65.66.64
   User fcharih
+
+Host GPUVM
+  HostName 104.171.204.4
+  User fcharih
+  Port 2222
+
+Host nb-compute-cpudev.internal.nuvobio.com
+  HostName nb-compute-cpudev.internal.nuvobio.com
+  User nuvobioadmin
+
+
      
 #############################################
 # Digital Alliance
