@@ -13,7 +13,7 @@
   };
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
   let
-    system = builtins.currentSystem;
+    system = {{ if eq .chezmoi.os "linux" }}"x86_64-linux"{{ else if eq .chezmoi.os "darwin" }}"aarch64-darwin"{{ end }};
     pkgs = import nixpkgs {
       inherit system;
       config.allowUnfree = true;
