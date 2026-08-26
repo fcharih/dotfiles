@@ -22,6 +22,11 @@ in
     "${config.home.homeDirectory}/.local/bin"
     "${config.home.homeDirectory}/.cargo/bin"
     "${config.home.homeDirectory}/.environment/commands"
+    "${config.home.homeDirectory}/.environment/commands/bio"
+    "${config.home.homeDirectory}/.environment/commands/cli-utils"
+    "${config.home.homeDirectory}/.environment/commands/internet"
+    "${config.home.homeDirectory}/.environment/commands/notification"
+    "${config.home.homeDirectory}/.environment/commands/nuvobio"
     "${config.home.homeDirectory}/.config/emacs/bin"
   ];
   programs.zsh = {
