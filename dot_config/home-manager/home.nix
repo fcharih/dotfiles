@@ -10,7 +10,10 @@ in
   home.homeDirectory =
     if pkgs.stdenv.isDarwin then "/Users/fcharih" else "/home/fcharih";
   home.stateVersion = "24.11";
-  home.packages = import ./packages.nix { inherit pkgs; };
+  home.packages = (import ./packages.nix { inherit pkgs; }) ++ [
+    pkgs.pkg-config
+    pkgs.openssl
+  ];
   programs.home-manager.enable = true;
   home.sessionVariables = {
     PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
@@ -25,7 +28,7 @@ in
     enable = true;
     enableCompletion = true;
     shellAliases = {
-      nix-pkg = "vim ~/.config/home-manager/packages.nix && nix-update";
+      nix-pkgs = "vim ~/.config/home-manager/packages.nix && nix-update";
       emacs = "emacs -nw";
       emacsdaemon = "emacs --daemon";
       emacsa = "emacs -c -nw";
