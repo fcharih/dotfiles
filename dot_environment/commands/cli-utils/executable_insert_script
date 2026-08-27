@@ -1,0 +1,24 @@
+#! /usr/bin/env python3
+import os
+import subprocess as sp
+import re
+import shutil
+
+filenames = [filename for filename in os.listdir() if re.search(r'\d\d.*', filename)]
+filenames = sorted(filenames, key=lambda x: int(x.split('_')[0]))
+
+print("===============================================")
+print("The scripts in the directory are the following:\n")
+for i, filename in enumerate(filenames):
+    print(f"{i + 1} - {filename}")
+print("===============================================")
+
+new_filename = input("Enter the new filename (with the number prepended.\n>")
+new_file_number = int(new_filename.split('_')[0])
+
+for filename in filenames:
+    filename_number = int(filename.split('_')[0])
+    filename_name = filename.split('_')[1]
+    if filename_number >= new_file_number:
+        shutil.move(filename, f"{filename_number + 1:02d}_{filename_name}")
+    sp.run(f"touch {new_filename}", shell=True)
