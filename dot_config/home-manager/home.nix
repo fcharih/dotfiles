@@ -17,6 +17,8 @@ in
   programs.home-manager.enable = true;
   home.sessionVariables = {
     PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
+    XDG_CONFIG_PATH = "${config.home.homeDirectory}/.config";
+    HOMEBREW_BUNDLE_FILE = "${config.home.homeDirectory}/.config/brewfile/Brewfile";
   };
   home.sessionPath = [
     "${config.home.homeDirectory}/.local/bin"
