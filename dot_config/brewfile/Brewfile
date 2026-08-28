@@ -1,6 +1,7 @@
 tap "hashicorp/tap"
 brew "hashicorp/tap/terraform", trusted: true
 brew "rclone"
-cargo "tsql", source: "https://github.com/Avnerus/tsql.git?branch=fix-rustls-provider"
+tap "fcoury/tap"
+brew "fcoury/tap/tsql", trusted: true
 tap "gittower/tap"
 brew "gittower/tap/git-flow-next", trusted: true
