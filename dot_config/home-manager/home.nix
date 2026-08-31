@@ -1,10 +1,4 @@
 { inputs, pkgs, config, ... }:
-let
-  azure-cli-with-extensions = pkgs.azure-cli.withExtensions [
-    pkgs.azure-cli-extensions.azure-devops
-    pkgs.azure-cli-extensions.ssh
-  ];
-in
 {
   home.username = "fcharih";
   home.homeDirectory =
