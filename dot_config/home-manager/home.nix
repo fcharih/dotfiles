@@ -1,8 +1,11 @@
-{ inputs, pkgs, config, ... }:
+{ inputs, pkgs, config, lib, myUser, ... }:
+let
+  username = builtins.head (lib.strings.splitString "@" myUser);
+in
 {
-  home.username = ${myUser};
+  home.username = username;
   home.homeDirectory =
-    if pkgs.stdenv.isDarwin then "/Users/${myUser}" else "/home/${myUser}";
+    if pkgs.stdenv.isDarwin then "/Users/${username}" else "/home/${username}";
   home.stateVersion = "24.11";
   home.packages = (import ./packages.nix { inherit pkgs; }) ++ [
     pkgs.pkg-config

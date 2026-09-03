@@ -11,12 +11,11 @@
       };
     };
   };
-  outputs = { self, nixpkgs, home-manager, ... }@inputs:
+
+outputs = { self, nixpkgs, home-manager, ... }@inputs:
   let
     system = {{ if eq .chezmoi.os "linux" }}"x86_64-linux"{{ else if eq .chezmoi.os "darwin" }}"aarch64-darwin"{{ end }};
-    specialArgs = { 
-      myUser = {{ .chezmoi.username }}; 
-    };
+    myUser = "{{ .chezmoi.username }}";
     pkgs = import nixpkgs {
       inherit system;
       config.allowUnfree = true;
@@ -27,7 +26,7 @@
       modules = [
         ./home.nix
       ];
-      extraSpecialArgs = { inherit inputs; };
+      extraSpecialArgs = { inherit inputs myUser; };
     };
   };
 }
