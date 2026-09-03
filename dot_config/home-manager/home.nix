@@ -1,8 +1,8 @@
 { inputs, pkgs, config, ... }:
 {
-  home.username = "fcharih";
+  home.username = ${myUser};
   home.homeDirectory =
-    if pkgs.stdenv.isDarwin then "/Users/fcharih" else "/home/fcharih";
+    if pkgs.stdenv.isDarwin then "/Users/${myUser}" else "/home/${myUser}";
   home.stateVersion = "24.11";
   home.packages = (import ./packages.nix { inherit pkgs; }) ++ [
     pkgs.pkg-config

@@ -14,6 +14,9 @@
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
   let
     system = {{ if eq .chezmoi.os "linux" }}"x86_64-linux"{{ else if eq .chezmoi.os "darwin" }}"aarch64-darwin"{{ end }};
+    specialArgs = { 
+      myUser = {{ .chezmoi.username }}; 
+    };
     pkgs = import nixpkgs {
       inherit system;
       config.allowUnfree = true;
