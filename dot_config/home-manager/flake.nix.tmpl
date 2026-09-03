@@ -21,7 +21,7 @@ outputs = { self, nixpkgs, home-manager, ... }@inputs:
       config.allowUnfree = true;
     };
   in {
-    homeConfigurations.{{ splitList "@" .chezmoi.username | first }} = home-manager.lib.homeManagerConfiguration {
+    homeConfigurations."${myUser}" = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
       modules = [
         ./home.nix
